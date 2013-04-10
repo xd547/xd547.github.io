@@ -6,8 +6,9 @@ comments: true
 categories: Main
 ---
 用 Octopress 的 Hello World
+``` ruby Hello World
+puts "Hello World"
 ```
-Hello World
-```
+
 
 
