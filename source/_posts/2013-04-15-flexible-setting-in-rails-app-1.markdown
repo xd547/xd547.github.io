@@ -26,7 +26,7 @@ end
 add_index(:app_settings, :singleton_guard, :unique => true) 
 ```
 <!-- more -->
-2.下面直接贴整个 AppSetting model的代码  
+2.下面直接贴整个 AppSetting model 的代码  
 ```ruby app_setting.rb
 class AppSetting < ActiveRecord::Base
   attr_accessible :value, :list
