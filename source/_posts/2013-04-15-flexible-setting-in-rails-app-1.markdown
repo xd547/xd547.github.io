@@ -96,5 +96,5 @@ AppSetting["site_name"] = "example site"
 # get "site_name" and assign it to variable site_name
 site_name = AppSetting["site_name"]
 ```
-5.下一篇将介绍如何在 Controler 和 view 中 使用 AppSetting  
+5.下一篇[Ruby on Rails 中灵活的应用程序设置（二）](/blog/2013/04/29/flexible-setting-in-rails-app-2/)将介绍如何在 Controler 和 view 中 使用 AppSetting  
 参考 [1](http://stackoverflow.com/questions/399447/how-to-implement-a-singleton-model)
