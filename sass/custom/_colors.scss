@@ -46,3 +46,7 @@ $header-bg: #F2F2F2;
 $header-border: lighten($header-bg, 15);
 $title-color: #333;
 // $nav-color: #FFF;
+.site_title {
+  color: #FFF;
+  font-weight: bold;
+}

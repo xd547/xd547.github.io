@@ -1,7 +1,12 @@
 body > nav {
-  position: relative;
+  position: fixed;
+  top:0px;
+  left: 0px;
+  z-index: 1024;
+  width: 100%;
+  opacity: 0.8;
   background-color: $nav-bg;
-  @include background($nav-bg-front, $nav-bg-back);
+  // @include background($nav-bg-front, $nav-bg-back);
   border: {
     top: 1px solid $nav-border-top;
     bottom: 1px solid $nav-border-bottom; }
@@ -9,7 +14,7 @@ body > nav {
   padding-bottom: .35em;
   form {
     @include background-clip(padding-box);
-    margin: 0; padding: 0;
+    margin: 0; padding: 0 5.6em 0 0;
     .search {
       padding: .3em .5em 0;
       font-size: .85em;
@@ -130,7 +135,7 @@ body > nav {
       }
     }
   }
-  ul.subscription { position: relative; top: .2em; li, a { border: 0; padding: 0; }}
+  ul.subscription { position: relative; top: .2em; right: 21em; li, a { border: 0; padding: 0; }}
   a[rel=subscribe-rss]{ @include mask-subscription-nav('rss.png'); }
   a[rel=subscribe-email]{ @include mask-subscription-nav('email.png'); }
 }
