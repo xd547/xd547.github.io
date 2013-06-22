@@ -8,6 +8,7 @@ categories: ["编程", "rails"]
 本篇介绍的方法是一个模型（Model）的多个控制器（Controller）中如何使用 Sweeper   
 使用场景：需要后台管理的应用程序中，后台更新信息后，自动清除前台页面的缓存   
 下面就是具体过程   
+<!-- more -->
 0.在 rails 的 config/environments/* 相应的环境配置文件中加入下面代码，这个缓存配置默认在 development test 环境是关闭的，在 production 环境中是开启的   
 ```ruby
 config.action_controller.perform_caching = true
