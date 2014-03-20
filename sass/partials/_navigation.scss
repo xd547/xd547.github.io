@@ -6,12 +6,12 @@ body > nav {
   width: 100%;
   opacity: 0.9;
   background-color: $nav-bg;
-  -webkit-box-shadow:0 0 2px black;
-  -moz-box-shadow:0 0 2px black;
+  // -webkit-box-shadow:0 0 2px black;
+  // -moz-box-shadow:0 0 2px black;
   // @include background($nav-bg-front, $nav-bg-back);
   border: {
-    top: 1px solid $nav-border-top;
-    bottom: 1px solid $nav-border-bottom; }
+    top: 1px solid $nav-bg;
+    bottom: 1px solid $nav-bg; }
   padding-top: .35em;
   padding-bottom: .35em;
   form {
@@ -25,7 +25,7 @@ body > nav {
       width: 95%;
       @include border-radius(.5em);
       @include background-clip(padding-box);
-      @include box-shadow(lighten($nav-bg, 2) 0 1px);
+      // @include box-shadow(lighten($nav-bg, 2) 0 1px);
       // background-color: lighten($nav-bg, 15);
       background-color: #fff;
       border: 1px solid $nav-border;
