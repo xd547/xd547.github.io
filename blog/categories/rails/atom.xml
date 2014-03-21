@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rails | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[使用through关联时访问关系的属性]]></title>
+    <link href="http://xd547.github.io/blog/2013/12/26/get-association-attributes-using-through/"/>
+    <updated>2013-12-26T21:49:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/12/26/get-association-attributes-using-through</id>
+    <content type="html"><![CDATA[<p>0.有下面三个 model 关联，使用 through 来简化对 Ownership 的访问  <br/>
+```ruby
+class User &lt; ActiveRecord::Base
+  # association
+  has_many :ownerships, dependent: :destroy
+  has_many :shops, through: :ownerships
+end</p>
+
+<p>class Ownership &lt; ActiveRecord::Base
+  belongs_to :user
+  belongs_to :shop
+end</p>
+
+<p>class Shop &lt; ActiveRecord::Base
+  # association
+  has_one  :ownership, dependent: :destroy
+  has_one  :user, through: :ownership
+end
+<code>
+1.此时无法在Shop中在 after_create 来访问 ownership 的 user_id 属性，因为这时 owership 还未创建。当事务 commit 以后 owership 被创建，同时拥有 user_id 属性。这时就可以获得 user_id 从而进行相关操作    
+</code>ruby
+class Shop &lt; ActiveRecord::Base
+  after_commit :get_attr_after_destroy, on: [:destroy]
+  after_commit :get_attr_after_create,  on: [:create]</p>
+
+<p>  after_create :get_attr_in_after_create</p>
+
+<p>  # association
+  has_one  :ownership, dependent: :destroy
+  has_one  :user, through: :ownership</p>
+
+<p>  private</p>
+
+<pre><code>def get_attr_after_destroy
+  user_id = self.ownership.user_id
+end
+
+def get_attr_after_create
+  user_id = self.ownership.user_id
+end
+
+def get_attr_in_after_create
+  # self.ownership is nil
+  # NoMethodError: undefined method `user_id' for nil:NilClass
+  user_id = self.ownership.user_id
+end
+</code></pre>
+
+<p>end
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rails 小提示]]></title>
+    <link href="http://xd547.github.io/blog/2013/12/26/rails-tips/"/>
+    <updated>2013-12-26T17:23:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/12/26/rails-tips</id>
+    <content type="html"><![CDATA[<ul>
+<li>重写activerecord 的 method_missing 不是一个好的主意 #rails</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails 中跨控制器的缓存控制（一）]]></title>
+    <link href="http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1/"/>
+    <updated>2013-06-22T14:55:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1</id>
+    <content type="html"><![CDATA[<p>本篇介绍的方法是一个模型（Model）的多个控制器（Controller）中如何使用 Sweeper <br/>
+使用场景：需要后台管理的应用程序中，后台更新信息后，自动清除前台页面的缓存 <br/>
+下面就是具体过程</p>
+
+<!-- more -->
+
+
+<p>0.在 rails 的 config/environments/* 相应的环境配置文件中加入下面代码，这个缓存配置默认在 development test 环境是关闭的，在 production 环境中是开启的 <br/>
+<code>ruby
+config.action_controller.perform_caching = true
+</code>
+1.假设我们有一个名为 Post 的模型 <br/>
+2.在 app 目录下新建 sweepers 目录，用于存放 sweeper 文件，在该目录下添加 post_sweeper.rb 文件，添加了类常量 CACHE_PATH <br/>
+```ruby post_sweeper.rb
+class PostSweeper &lt; ActionController::Caching::Sweeper
+  CACHE_PATH = "posts_index" # 跨控制器的关键
+  observe Post</p>
+
+<p>  def after_create(post)</p>
+
+<pre><code>expire_cache_for(post)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def after_update(post)</p>
+
+<pre><code>expire_cache_for(post)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def after_destroy(post)</p>
+
+<pre><code>expire_cache_for(post)
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<pre><code>def expire_cache_for(post)
+  expire_fragment(PostSweeper::CACHE_PATH) # 清空命名的 expire_fragment
+end
+</code></pre>
+
+<p>end
+<code>
+3.在需要缓存的控制器（Post的前台）中加入如下代码   
+</code>ruby
+class PostsController &lt; ApplicationController
+  caches_action :index, :cache_path => PostSweeper::CACHE_PATH
+  def index</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  # 其他 action ...
+end
+<code>
+4.在需要控制缓存的控制器（Post的后台）中加入如下代码   
+</code>ruby
+class Admin::PostsController &lt; ApplicationController
+  cache_sweeper :post_sweeper # 指定 sweeper</p>
+
+<p>  # index show new create edit update destroy actions ...
+end
+```
+5.这样就可以在后台更新 Post 的时候通过 sweeper 来更新前台页面的缓存<br/>
+参考 <a href="http://guides.rubyonrails.org/caching_with_rails.html">Caching with Rails: An overview</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 编程 | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/bian-cheng/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails 中跨控制器的缓存控制（一）]]></title>
+    <link href="http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1/"/>
+    <updated>2013-06-22T14:55:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1</id>
+    <content type="html"><![CDATA[<p>本篇介绍的方法是一个模型（Model）的多个控制器（Controller）中如何使用 Sweeper <br/>
+使用场景：需要后台管理的应用程序中，后台更新信息后，自动清除前台页面的缓存 <br/>
+下面就是具体过程</p>
+
+<!-- more -->
+
+
+<p>0.在 rails 的 config/environments/* 相应的环境配置文件中加入下面代码，这个缓存配置默认在 development test 环境是关闭的，在 production 环境中是开启的 <br/>
+<code>ruby
+config.action_controller.perform_caching = true
+</code>
+1.假设我们有一个名为 Post 的模型 <br/>
+2.在 app 目录下新建 sweepers 目录，用于存放 sweeper 文件，在该目录下添加 post_sweeper.rb 文件，添加了类常量 CACHE_PATH <br/>
+```ruby post_sweeper.rb
+class PostSweeper &lt; ActionController::Caching::Sweeper
+  CACHE_PATH = "posts_index" # 跨控制器的关键
+  observe Post</p>
+
+<p>  def after_create(post)</p>
+
+<pre><code>expire_cache_for(post)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def after_update(post)</p>
+
+<pre><code>expire_cache_for(post)
+</code></pre>
+
+<p>  end</p>
+
+<p>  def after_destroy(post)</p>
+
+<pre><code>expire_cache_for(post)
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<pre><code>def expire_cache_for(post)
+  expire_fragment(PostSweeper::CACHE_PATH) # 清空命名的 expire_fragment
+end
+</code></pre>
+
+<p>end
+<code>
+3.在需要缓存的控制器（Post的前台）中加入如下代码   
+</code>ruby
+class PostsController &lt; ApplicationController
+  caches_action :index, :cache_path => PostSweeper::CACHE_PATH
+  def index</p>
+
+<pre><code># ...
+</code></pre>
+
+<p>  end</p>
+
+<p>  # 其他 action ...
+end
+<code>
+4.在需要控制缓存的控制器（Post的后台）中加入如下代码   
+</code>ruby
+class Admin::PostsController &lt; ApplicationController
+  cache_sweeper :post_sweeper # 指定 sweeper</p>
+
+<p>  # index show new create edit update destroy actions ...
+end
+```
+5.这样就可以在后台更新 Post 的时候通过 sweeper 来更新前台页面的缓存<br/>
+参考 <a href="http://guides.rubyonrails.org/caching_with_rails.html">Caching with Rails: An overview</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails 中灵活的应用程序设置（二）]]></title>
+    <link href="http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2/"/>
+    <updated>2013-04-29T16:03:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2</id>
+    <content type="html"><![CDATA[<p>在上一篇<a href="/blog/2013/04/15/flexible-setting-in-rails-app-1/">Ruby on Rails 中灵活的应用程序设置（一）</a>中讲到如何创建一个 AppSettings 的 model 这篇要讲的是在 controller 和 view 中使用 AppSetting<br/>
+0.创建 AppSetting Controller<br/>
+<code>bash
+rails g controller AppSetting index
+</code>
+1.新建一个 form partials</p>
+
+<!-- more -->
+
+
+<p>```html _form.html.erb</p>
+
+<!-- 实际运用时里面的中文可以用 I18n处理 -->
+
+
+<table>
+    <tr>
+      <th>属性</th>
+      <th>值</th>
+    </tr>
+  <%= form_tag(app_setting_path) do -%>
+    <tr>
+      <td>
+        <%= label_tag :site_name, "站点名称"%>
+      </td>
+      <td>
+        <%= text_field_tag :site_name, AppSetting["site_name"] %>
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= label_tag :site_url, "站点链接" %>
+      </td>
+      <td>
+        <%= text_field_tag :site_url, AppSetting["site_url"] %>
+      </td>
+    </tr>
+    
+    <tr>
+      <td>
+      </td>
+      <td>
+        <%= submit_tag "保存" %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+
+<p>```</p>
+
+<p>2.下面直接给出 AppSettingController 文件<br/>
+```ruby app_setting_controller.rb
+class AppSettingController &lt; ApplicationController
+  def index</p>
+
+<pre><code>method = request.method
+
+# 处理 POST
+if method == "POST"
+  # 验证字段 具体看下面的 validate_setting_length 方法
+  validation = validate_setting_length(params)
+  if validation.length == 0
+    # 如果验证通过 保存每一个字段
+    setting_fields.each do |v|
+      AppSetting[v] = params[v]
+    end
+    msg = I18n.t("app_setting.updated_msg")
+    flash[:notice] = msg
+  else
+    msg = I18n.t("app_setting.error_title", :error_count =&gt; validation.length)
+    validation.each do |value|
+      msg += I18n.t("app_setting.error_msg", 
+        :field =&gt; I18n.t("app_setting.#{value}"))
+    end
+    flash[:error] = msg
+  end
+  respond_to do |format|
+    format.html { redirect_to app_setting_url }
+  end
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  private</p>
+
+<pre><code># 验证字段 这里只验证每个字段的最大长度，需要其他的自己添加
+def validate_setting_length(params)
+  max_length = 255
+  fields = []
+  setting_fields.each do |v|
+    if params[v].length &gt; max_length
+      fields.push(v)
+    end
+  end
+  fields
+end
+
+def setting_fields
+  # 把需要保存的设置项放到这个 array 里面
+  ["site_name", "site_url"] 
+end
+</code></pre>
+
+<p>end</p>
+
+<p>```
+分析：在 AppSettings 保存时 每设置一个字段都会保存一次，可以添加所有字段一次处理完以后再保存的代码， 而 AppSetting 在读取时，第一次是往数据库中读取，再次读取时则从 cache（由 rails 控制） 里面读取，所以性能尚可。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails 中灵活的应用程序设置（一）]]></title>
+    <link href="http://xd547.github.io/blog/2013/04/15/flexible-setting-in-rails-app-1/"/>
+    <updated>2013-04-15T19:23:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/04/15/flexible-setting-in-rails-app-1</id>
+    <content type="html"><![CDATA[<p>本文介绍的方法以 ActiveRecord 为基础将应用程序的设置存储到数据库中<br/>
+为了方便扩展，设置将以 json 的格式保存到数据库<br/>
+同时设置是全局的，只需要一条数据记录就可以满足需求，于是用到了 singleton pattern<br/>
+<strong>注意</strong>这种处理方法可能会有性能问题<br/>
+下面进入正题 <br/>
+0.创建 AppSetting model<br/>
+<code>bash
+rails g model AppSetting
+</code>
+1.修改 AppSetting 的 migration
+```ruby
+create_table :app_settings do |t|
+  t.integer :singleton_guard
+  t.text :value</p>
+
+<p>  t.timestamps
+end</p>
+
+<p>add_index(:app_settings, :singleton_guard, :unique => true)
+```</p>
+
+<!-- more -->
+
+
+<p>2.下面直接贴整个 AppSetting model 的代码<br/>
+```ruby app_setting.rb
+class AppSetting &lt; ActiveRecord::Base
+  attr_accessible :value, :list
+  attr_accessor :list</p>
+
+<p>  after_initialize :init
+  before_save :covert_format</p>
+
+<p>  validates_inclusion_of :singleton_guard, :in => [0]</p>
+
+<p>  def covert_format</p>
+
+<pre><code>self.value = self.list.to_json 
+</code></pre>
+
+<p>  end</p>
+
+<p>  def load_list</p>
+
+<pre><code>begin
+  self.list = JSON.parse(self.value)
+rescue JSON::ParserError =&gt; msg
+  logger.error("AppSetting: Can not load list!")
+  self.list = {}
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def <a href="key"></a></p>
+
+<pre><code>self.list[key]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def []=(key, value)</p>
+
+<pre><code>self.list[key] = value
+self.save
+</code></pre>
+
+<p>  end</p>
+
+<p>  def init</p>
+
+<pre><code>self.value ||= "{}"
+self.list ||= load_list
+self.singleton_guard ||= 0
+</code></pre>
+
+<p>  end</p>
+
+<p>  # class method</p>
+
+<p>  # singleton
+  def AppSetting.instance</p>
+
+<pre><code>begin
+  find(1)
+rescue ActiveRecord::RecordNotFound
+  row = AppSetting.new
+  row.singleton_guard = 0
+  row.save!
+  row
+end
+</code></pre>
+
+<p>  end</p>
+
+<p>  def AppSetting.<a href="key"></a></p>
+
+<pre><code>AppSetting.instance[key]
+</code></pre>
+
+<p>  end</p>
+
+<p>  def AppSetting.[]=(key, value)</p>
+
+<pre><code>AppSetting.instance[key] = value
+</code></pre>
+
+<p>  end
+end
+<code>
+3.为了方便 AppSetting 的使用，重载了操作符 '[]', '[]='  
+4.使用示例  
+</code>ruby</p>
+
+<h1>set site_name to "example site". AppSetting will save when set the value</h1>
+
+<p>AppSetting["site_name"] = "example site"</p>
+
+<h1>get "site_name" and assign it to variable site_name</h1>
+
+<p>site_name = AppSetting["site_name"]
+```
+5.下一篇<a href="/blog/2013/04/29/flexible-setting-in-rails-app-2/">Ruby on Rails 中灵活的应用程序设置（二）</a>将介绍如何在 Controler 和 view 中 使用 AppSetting<br/>
+参考 <a href="http://stackoverflow.com/questions/399447/how-to-implement-a-singleton-model">1</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails Rspec 测试的上传模拟]]></title>
+    <link href="http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec/"/>
+    <updated>2013-04-12T10:13:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec</id>
+    <content type="html"><![CDATA[<p>Rspec 是一个 ruby 的测试框架，在进行 Ruby on Rails 开发时通常都会使用这个框架<br/>
+本文不讨论如何在 Ruby on Rails 中 配置 Rspec<br/>
+0.准备工作</p>
+
+<p>0).在 Ruby on Rails 项目文件夹下的 spec/fixtures 下创建文件夹 files<br/>
+1).把测试文件拷贝到该文件夹下面，这里的示例为 "egg.zip", "egg.jpg"</p>
+
+<p>1.引入 fixture_file_upload <br/>
+<code>ruby
+include ActionDispatch::TestProcess
+</code></p>
+
+<p>2.为测试准备上传文件<br/>
+```ruby
+describe UploadController do
+  before(:each) do</p>
+
+<pre><code>@file = fixture_file_upload('/files/egg.zip', 'application/zip')
+@image = fixture_file_upload('/files/egg.jpg', 'image/jpeg')
+</code></pre>
+
+<p>  end
+end
+<code>
+3.在测试中上传文件  
+</code>ruby
+describe "upload" do
+  it "should upload file" do</p>
+
+<pre><code>post :upload, :file =&gt; @file  #upload action is here
+expect(response).to redirect_to(upload_path)
+flash[:notice].include?("upload success").should equal(true)
+</code></pre>
+
+<p>  end</p>
+
+<p>  it "should upload image" do</p>
+
+<pre><code>post :upload, :file =&gt; @image  #upload action is here
+expect(response).to redirect_to(upload_path)
+flash[:notice].include?("upload success").should equal(true)
+</code></pre>
+
+<p>  end
+end
+<code>
+4.运行测试  
+</code>bash
+rspec spec/controllers/upload_controller_spec.rb
+<code>
+5.完整的 spec  
+</code>ruby upload_controller_spec.rb
+require 'spec_helper'
+include ActionDispatch::TestProcess</p>
+
+<p>describe UploadController do
+  before(:each) do</p>
+
+<pre><code>@file = fixture_file_upload('/files/egg.zip', 'application/zip')
+@image = fixture_file_upload('/files/egg.jpg', 'image/jpeg')
+</code></pre>
+
+<p>  end</p>
+
+<p>  describe "upload" do</p>
+
+<pre><code>it "should upload file" do
+  post :upload, :file =&gt; @file  #upload action is here
+  expect(response).to redirect_to(upload_path)
+  flash[:notice].include?("upload success").should equal(true)
+end
+
+it "should upload image" do
+  post :upload, :file =&gt; @image  #upload action is here
+  expect(response).to redirect_to(upload_path)
+  flash[:notice].include?("upload success").should equal(true)
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在 Ubuntu 上安装 Rmagick]]></title>
+    <link href="http://xd547.github.io/blog/2013/04/10/install-rmagick-on-ubuntu/"/>
+    <updated>2013-04-10T22:47:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/04/10/install-rmagick-on-ubuntu</id>
+    <content type="html"><![CDATA[<p>Rmagick 是 ruby 中处理图片的开发库，在 Ruby on Rails 中经常用来处理图片的输出和验证码。 <br/>
+下面就是如何在 Ubuntu 上 安装 Rmagick。<br/>
+0.安装 ruby 的运行环境，推荐使用 rvm 来管理和使用 ruby。<br/>
+1.打开 shell 输入如下命令<br/>
+<code>bash
+sudo apt-get install imagemagick libmagickwand-dev
+</code>
+2.继续输入
+<code>bash
+gem install rmagick
+</code>
+3.验证安装，打开 irb 输入<br/>
+<code>ruby
+require 'RMagick'
+</code>
+返回 true 就说安装成功</p>
+
+<p>如果在 Ruby on Rails 中使用需要在项目的 Gemfile 中加入
+<code>bash
+gem "rmagick"
+</code>
+然后
+<code>bash
+bundle install
+</code>
+至此 Rmagic 就安装完毕了 <br/>
+另附 Rmagick 的<a href="http://studio.imagemagick.org/RMagick/doc/">文档</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Main | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/main/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello world]]></title>
+    <link href="http://xd547.github.io/blog/2013/04/10/hello-world/"/>
+    <updated>2013-04-10T11:55:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/04/10/hello-world</id>
+    <content type="html"><![CDATA[<p>用 Octopress 的 Hello World
+<code>ruby Hello World
+puts "Hello World"
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

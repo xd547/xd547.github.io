@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: tips | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/tips/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rails 小提示]]></title>
+    <link href="http://xd547.github.io/blog/2013/12/26/rails-tips/"/>
+    <updated>2013-12-26T17:23:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/12/26/rails-tips</id>
+    <content type="html"><![CDATA[<ul>
+<li>重写activerecord 的 method_missing 不是一个好的主意 #rails</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: web server | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/web-server/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[在ubuntu上安装较新版本的nodejs]]></title>
+    <link href="http://xd547.github.io/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu/"/>
+    <updated>2013-12-18T14:21:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu</id>
+    <content type="html"><![CDATA[<p><code>bash
+sudo apt-get update
+sudo apt-get install -y python-software-properties python g++ make
+sudo add-apt-repository -y ppa:chris-lea/node.js
+sudo apt-get update
+sudo apt-get install nodejs
+</code>
+因为用到 <code>add-apt-repository</code> 可能需要安装 <code>software-properties-common</code>  <br/>
+<code>bash
+sudo apt-get install software-properties-common
+</code></p>
+
+<p>来源：<a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint-elementary-os">Installing Node.js via package manager</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[在Ubuntu上使用nginx官方源安装nginx]]></title>
+    <link href="http://xd547.github.io/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu/"/>
+    <updated>2013-12-17T21:33:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu</id>
+    <content type="html"><![CDATA[<p>0.添加key
+<code>bash
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
+</code>
+1.添加到nginx官方源到 <code>/etc/apt/sources.list</code>
+<code>bash
+deb http://nginx.org/packages/ubuntu/ precise nginx
+</code>
+2.如果原来安装过nginx，备份相关配置文件后删除nginx及其相关组件
+<code>bash
+sudo apt-get purge nginx*
+</code>
+3.安装nginx
+<code>bash
+sudo apt-get update
+sudo apt-get install nginx
+</code>
+4.安装成功后可以用-v查看ningx版本
+```bash
+nginx -v</p>
+
+<h1>nginx version: nginx/1.4.4</h1>
+
+<p>```
+来源：<a href="http://ruby-journal.com/how-to-setup-rails-app-with-puma-and-nginx/">How to Setup Rails App With Puma and NGINX</a></p>
+]]></content>
+  </entry>
+  
+</feed>

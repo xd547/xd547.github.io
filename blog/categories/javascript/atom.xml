@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[修复Firefox下用javascript创建的表单元素无法正确提交的bug]]></title>
+    <link href="http://xd547.github.io/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox/"/>
+    <updated>2013-12-01T12:53:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox</id>
+    <content type="html"><![CDATA[<p>项目<a href="https://github.com/xd547/stacktxt">StackTXT</a>
+描述： <br/>
+Firefox下 document.createElement 创建的表单元素无法正确提交(submit)</p>
+
+<p>解决：
+将创建的表单元素加入到 document.body 提交完毕后删除</p>
+
+<!-- more -->
+
+
+<p>```coffee-script
+share = ->
+  shareForm = document.createElement("form")
+  shareForm.setAttribute("method", "post")
+  shareForm.setAttribute("action", "/")</p>
+
+<p>  shareForm.appendChild(share_content)
+  # add shareForm to DOM
+  document.body.appendChild(shareForm)
+  shareForm.submit()
+  # remove shaerForm from DOM
+  document.body.removeChild(shareForm)
+  return
+```</p>
+]]></content>
+  </entry>
+  
+</feed>

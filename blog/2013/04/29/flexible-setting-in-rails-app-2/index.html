@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ruby on Rails 中灵活的应用程序设置（二） - RainySummer's New Blog</title>
+  <meta name="author" content="RainySummer">
+
+  
+  <meta name="description" content="在上一篇Ruby on Rails 中灵活的应用程序设置（一）中讲到如何创建一个 AppSettings 的 model 这篇要讲的是在 controller 和 view 中使用 AppSetting
+0.创建 AppSetting Controller 1
+rails g controller &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="RainySummer's New Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+<!-- apple icon -->
+<link rel="apple-touch-icon-precomposed" href="/images/icon-144.png">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-342522-12']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="RSS订阅">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:xd547.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="搜索"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li class="site_title"><a href="/">RainySummer's New Blog</a></li>
+  <li><a href="/blog/archives">存档</a></li>
+  <li><a href="http://ba.xd547.com">旧站存档</a></li>
+  <li><a href="/about">关于</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Ruby on Rails 中灵活的应用程序设置（二）</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T16:03:00+08:00" pubdate data-updated="true">2013-04-29 16:03:00</time>
+        
+         | <a href="#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>在上一篇<a href="/blog/2013/04/15/flexible-setting-in-rails-app-1/">Ruby on Rails 中灵活的应用程序设置（一）</a>中讲到如何创建一个 AppSettings 的 model 这篇要讲的是在 controller 和 view 中使用 AppSetting<br/>
+0.创建 AppSetting Controller</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rails g controller AppSetting index
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.新建一个 form partials</p>
+
+<!-- more -->
+
+
+<figure class='code'><figcaption><span>_form.html.erb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="c">&lt;!-- 实际运用时里面的中文可以用 I18n处理 --&gt;</span>
+</span><span class='line'><span class="nt">&lt;table&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;th&gt;</span>属性<span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;th&gt;</span>值<span class="nt">&lt;/th&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="err">&lt;</span>%= form_tag(app_setting_path) do -%&gt;
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>%= label_tag :site_name, &quot;站点名称&quot;%&gt;
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>%= text_field_tag :site_name, AppSetting[&quot;site_name&quot;] %&gt;
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>%= label_tag :site_url, &quot;站点链接&quot; %&gt;
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>%= text_field_tag :site_url, AppSetting[&quot;site_url&quot;] %&gt;
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nt">&lt;tr&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>      <span class="nt">&lt;td&gt;</span>
+</span><span class='line'>        <span class="err">&lt;</span>%= submit_tag &quot;保存&quot; %&gt;
+</span><span class='line'>      <span class="nt">&lt;/td&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;/tr&gt;</span>
+</span><span class='line'>  <span class="err">&lt;</span>% end %&gt;
+</span><span class='line'><span class="nt">&lt;/table&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.下面直接给出 AppSettingController 文件</p>
+
+<figure class='code'><figcaption><span>app_setting_controller.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">AppSettingController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">index</span>
+</span><span class='line'>    <span class="nb">method</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="c1"># 处理 POST</span>
+</span><span class='line'>    <span class="k">if</span> <span class="nb">method</span> <span class="o">==</span> <span class="s2">&quot;POST&quot;</span>
+</span><span class='line'>      <span class="c1"># 验证字段 具体看下面的 validate_setting_length 方法</span>
+</span><span class='line'>      <span class="n">validation</span> <span class="o">=</span> <span class="n">validate_setting_length</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span class='line'>      <span class="k">if</span> <span class="n">validation</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span>
+</span><span class='line'>        <span class="c1"># 如果验证通过 保存每一个字段</span>
+</span><span class='line'>        <span class="n">setting_fields</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">v</span><span class="o">|</span>
+</span><span class='line'>          <span class="no">AppSetting</span><span class="o">[</span><span class="n">v</span><span class="o">]</span> <span class="o">=</span> <span class="n">params</span><span class="o">[</span><span class="n">v</span><span class="o">]</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="n">msg</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s2">&quot;app_setting.updated_msg&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span class='line'>      <span class="k">else</span>
+</span><span class='line'>        <span class="n">msg</span> <span class="o">=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s2">&quot;app_setting.error_title&quot;</span><span class="p">,</span> <span class="ss">:error_count</span> <span class="o">=&gt;</span> <span class="n">validation</span><span class="o">.</span><span class="n">length</span><span class="p">)</span>
+</span><span class='line'>        <span class="n">validation</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">value</span><span class="o">|</span>
+</span><span class='line'>          <span class="n">msg</span> <span class="o">+=</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s2">&quot;app_setting.error_msg&quot;</span><span class="p">,</span>
+</span><span class='line'>            <span class="ss">:field</span> <span class="o">=&gt;</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s2">&quot;app_setting.</span><span class="si">#{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">))</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>        <span class="n">flash</span><span class="o">[</span><span class="ss">:error</span><span class="o">]</span> <span class="o">=</span> <span class="n">msg</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">respond_to</span> <span class="k">do</span> <span class="o">|</span><span class="nb">format</span><span class="o">|</span>
+</span><span class='line'>        <span class="nb">format</span><span class="o">.</span><span class="n">html</span> <span class="p">{</span> <span class="n">redirect_to</span> <span class="n">app_setting_url</span> <span class="p">}</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>    <span class="c1"># 验证字段 这里只验证每个字段的最大长度，需要其他的自己添加</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">validate_setting_length</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">max_length</span> <span class="o">=</span> <span class="mi">255</span>
+</span><span class='line'>      <span class="n">fields</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>      <span class="n">setting_fields</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">v</span><span class="o">|</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">params</span><span class="o">[</span><span class="n">v</span><span class="o">].</span><span class="n">length</span> <span class="o">&gt;</span> <span class="n">max_length</span>
+</span><span class='line'>          <span class="n">fields</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+</span><span class='line'>        <span class="k">end</span>
+</span><span class='line'>      <span class="k">end</span>
+</span><span class='line'>      <span class="n">fields</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">setting_fields</span>
+</span><span class='line'>      <span class="c1"># 把需要保存的设置项放到这个 array 里面</span>
+</span><span class='line'>      <span class="o">[</span><span class="s2">&quot;site_name&quot;</span><span class="p">,</span> <span class="s2">&quot;site_url&quot;</span><span class="o">]</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>分析：在 AppSettings 保存时 每设置一个字段都会保存一次，可以添加所有字段一次处理完以后再保存的代码， 而 AppSetting 在读取时，第一次是往数据库中读取，再次读取时则从 cache（由 rails 控制） 里面读取，所以性能尚可。</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">作者：<span class="fn">RainySummer</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T16:03:00+08:00" pubdate data-updated="true">2013-04-29 16:03:00</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/bian-cheng/'>编程</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/04/15/flexible-setting-in-rails-app-1/" title="Previous Post: Ruby on Rails 中灵活的应用程序设置（一）">&laquo; Ruby on Rails 中灵活的应用程序设置（一）</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2013/06/22/rails-cross-controller-cache-control-1/" title="Next Post: Ruby on Rails 中跨控制器的缓存控制（一）">Ruby on Rails 中跨控制器的缓存控制（一） &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>评论</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>最近发表</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/02/27/ruby-tricks/">Ruby 小技巧</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/25/why-i-hate-mac/">为什么我痛恨Mac</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/02/25/why-i-love-mac/">我喜欢Mac的几个原因</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/26/get-association-attributes-using-through/">使用through关联时访问关系的属性</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/12/26/rails-tips/">rails 小提示</a>
+      </li>
+    
+  </ul>
+</section>
+<section>
+  <h1>Links</h1>
+  <ul id="custom_links">
+    <li class="post">
+      <a href="http://tool.xd547.com/">迅雷|QQ旋风|快车|地址转换工具</a>
+    </li>
+  </ul>
+</section>
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - RainySummer -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'rainysummersnewblog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2/';
+        var disqus_url = 'http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2/';
+        var disqus_script = 'embed.js';
+        (function () {
+          var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+          dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+          (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        }());
+      
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

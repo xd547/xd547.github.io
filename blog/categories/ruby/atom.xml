@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby 小技巧]]></title>
+    <link href="http://xd547.github.io/blog/2014/02/27/ruby-tricks/"/>
+    <updated>2014-02-27T22:54:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2014/02/27/ruby-tricks</id>
+    <content type="html"><![CDATA[<p>Iterrator 有时需要index，那就加入with_index，如下
+<code>ruby
+f = File.open("testfile")
+f.each.with_index do |line, index|
+  puts "Line #{index} is: #{line}"
+end
+</code></p>
+
+<p>在Rails的migration中添加字段（add_column）option的limit说设置的值
+是添加字段类型的默认值，limit就不会出现在db/schema.rb中的相应位置。</p>
+]]></content>
+  </entry>
+  
+</feed>

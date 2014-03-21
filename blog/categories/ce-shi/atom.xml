@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 测试 | RainySummer's New Blog]]></title>
+  <link href="http://xd547.github.io/blog/categories/ce-shi/atom.xml" rel="self"/>
+  <link href="http://xd547.github.io/"/>
+  <updated>2014-03-21T11:10:22+08:00</updated>
+  <id>http://xd547.github.io/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby on Rails Rspec 测试的上传模拟]]></title>
+    <link href="http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec/"/>
+    <updated>2013-04-12T10:13:00+08:00</updated>
+    <id>http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec</id>
+    <content type="html"><![CDATA[<p>Rspec 是一个 ruby 的测试框架，在进行 Ruby on Rails 开发时通常都会使用这个框架<br/>
+本文不讨论如何在 Ruby on Rails 中 配置 Rspec<br/>
+0.准备工作</p>
+
+<p>0).在 Ruby on Rails 项目文件夹下的 spec/fixtures 下创建文件夹 files<br/>
+1).把测试文件拷贝到该文件夹下面，这里的示例为 "egg.zip", "egg.jpg"</p>
+
+<p>1.引入 fixture_file_upload <br/>
+<code>ruby
+include ActionDispatch::TestProcess
+</code></p>
+
+<p>2.为测试准备上传文件<br/>
+```ruby
+describe UploadController do
+  before(:each) do</p>
+
+<pre><code>@file = fixture_file_upload('/files/egg.zip', 'application/zip')
+@image = fixture_file_upload('/files/egg.jpg', 'image/jpeg')
+</code></pre>
+
+<p>  end
+end
+<code>
+3.在测试中上传文件  
+</code>ruby
+describe "upload" do
+  it "should upload file" do</p>
+
+<pre><code>post :upload, :file =&gt; @file  #upload action is here
+expect(response).to redirect_to(upload_path)
+flash[:notice].include?("upload success").should equal(true)
+</code></pre>
+
+<p>  end</p>
+
+<p>  it "should upload image" do</p>
+
+<pre><code>post :upload, :file =&gt; @image  #upload action is here
+expect(response).to redirect_to(upload_path)
+flash[:notice].include?("upload success").should equal(true)
+</code></pre>
+
+<p>  end
+end
+<code>
+4.运行测试  
+</code>bash
+rspec spec/controllers/upload_controller_spec.rb
+<code>
+5.完整的 spec  
+</code>ruby upload_controller_spec.rb
+require 'spec_helper'
+include ActionDispatch::TestProcess</p>
+
+<p>describe UploadController do
+  before(:each) do</p>
+
+<pre><code>@file = fixture_file_upload('/files/egg.zip', 'application/zip')
+@image = fixture_file_upload('/files/egg.jpg', 'image/jpeg')
+</code></pre>
+
+<p>  end</p>
+
+<p>  describe "upload" do</p>
+
+<pre><code>it "should upload file" do
+  post :upload, :file =&gt; @file  #upload action is here
+  expect(response).to redirect_to(upload_path)
+  flash[:notice].include?("upload success").should equal(true)
+end
+
+it "should upload image" do
+  post :upload, :file =&gt; @image  #upload action is here
+  expect(response).to redirect_to(upload_path)
+  flash[:notice].include?("upload success").should equal(true)
+end
+</code></pre>
+
+<p>  end
+end
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
