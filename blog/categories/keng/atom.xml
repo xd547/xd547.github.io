@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 坑 | RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/blog/categories/keng/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/blog/categories/keng/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[修改git push 后的commit message]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/17/modify-git-commit-msg-after-push/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/17/modify-git-commit-msg-after-push/"/>
     <updated>2013-12-17T16:17:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/17/modify-git-commit-msg-after-push</id>
+    <id>http://blog.xd547.com/blog/2013/12/17/modify-git-commit-msg-after-push</id>
     <content type="html"><![CDATA[<p>背景：手快把一个有拼写错误的commit message给push了  <br/>
 如何：
 <code>bash

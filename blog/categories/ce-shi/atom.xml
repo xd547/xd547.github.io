@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: 测试 | RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/blog/categories/ce-shi/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/blog/categories/ce-shi/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails Rspec 测试的上传模拟]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/12/simulate-upload-in-rspec/"/>
     <updated>2013-04-12T10:13:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec</id>
+    <id>http://blog.xd547.com/blog/2013/04/12/simulate-upload-in-rspec</id>
     <content type="html"><![CDATA[<p>Rspec 是一个 ruby 的测试框架，在进行 Ruby on Rails 开发时通常都会使用这个框架<br/>
 本文不讨论如何在 Ruby on Rails 中 配置 Rspec<br/>
 0.准备工作</p>

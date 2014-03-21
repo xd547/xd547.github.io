@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://xd547.github.io/sitemap.xml 
+Sitemap: http://blog.xd547.com/sitemap.xml 

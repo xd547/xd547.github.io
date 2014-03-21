@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ruby | RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/blog/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby 小技巧]]></title>
-    <link href="http://xd547.github.io/blog/2014/02/27/ruby-tricks/"/>
+    <link href="http://blog.xd547.com/blog/2014/02/27/ruby-tricks/"/>
     <updated>2014-02-27T22:54:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2014/02/27/ruby-tricks</id>
+    <id>http://blog.xd547.com/blog/2014/02/27/ruby-tricks</id>
     <content type="html"><![CDATA[<p>Iterrator 有时需要index，那就加入with_index，如下
 <code>ruby
 f = File.open("testfile")

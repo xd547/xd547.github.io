@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Ruby 小技巧]]></title>
-    <link href="http://xd547.github.io/blog/2014/02/27/ruby-tricks/"/>
+    <link href="http://blog.xd547.com/blog/2014/02/27/ruby-tricks/"/>
     <updated>2014-02-27T22:54:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2014/02/27/ruby-tricks</id>
+    <id>http://blog.xd547.com/blog/2014/02/27/ruby-tricks</id>
     <content type="html"><![CDATA[<p>Iterrator 有时需要index，那就加入with_index，如下</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -38,9 +38,9 @@
   
   <entry>
     <title type="html"><![CDATA[为什么我痛恨Mac]]></title>
-    <link href="http://xd547.github.io/blog/2014/02/25/why-i-hate-mac/"/>
+    <link href="http://blog.xd547.com/blog/2014/02/25/why-i-hate-mac/"/>
     <updated>2014-02-25T16:34:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2014/02/25/why-i-hate-mac</id>
+    <id>http://blog.xd547.com/blog/2014/02/25/why-i-hate-mac</id>
     <content type="html"><![CDATA[<p>我爱Mac，但Mac满满的都是槽点
 1. 我的是rMBP，USB接口少的可怜，才有两个，外接一个机械键盘，外接一个鼠标就没有了（不要告诉用蓝牙的，我也知道） <br/>
 2. 全局输入法切换，写代码的时候和朋友聊天，回到写代码的时候太难受，何况我用的还是vim（是我不懂Mac啊，改个设置就可以了啊） <br/>
@@ -51,9 +51,9 @@
   
   <entry>
     <title type="html"><![CDATA[我喜欢Mac的几个原因]]></title>
-    <link href="http://xd547.github.io/blog/2014/02/25/why-i-love-mac/"/>
+    <link href="http://blog.xd547.com/blog/2014/02/25/why-i-love-mac/"/>
     <updated>2014-02-25T15:58:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2014/02/25/why-i-love-mac</id>
+    <id>http://blog.xd547.com/blog/2014/02/25/why-i-love-mac</id>
     <content type="html"><![CDATA[<p>用了Mac还没有几天，就彻底的爱上Mac了  <br/>
 1. 电源线，非常柔软，不会硬邦邦的戳到改变Mac和插板的位置 <br/>
 2. 不用重启，就算重启，重启以后可以自动回到重启之前的状态 <br/>
@@ -77,9 +77,9 @@
   
   <entry>
     <title type="html"><![CDATA[使用through关联时访问关系的属性]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/26/get-association-attributes-using-through/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/26/get-association-attributes-using-through/"/>
     <updated>2013-12-26T21:49:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/26/get-association-attributes-using-through</id>
+    <id>http://blog.xd547.com/blog/2013/12/26/get-association-attributes-using-through</id>
     <content type="html"><![CDATA[<p>0.有下面三个 model 关联，使用 through 来简化对 Ownership 的访问</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -176,9 +176,9 @@
   
   <entry>
     <title type="html"><![CDATA[rails 小提示]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/26/rails-tips/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/26/rails-tips/"/>
     <updated>2013-12-26T17:23:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/26/rails-tips</id>
+    <id>http://blog.xd547.com/blog/2013/12/26/rails-tips</id>
     <content type="html"><![CDATA[<ul>
 <li>重写activerecord 的 method_missing 不是一个好的主意 #rails</li>
 </ul>
@@ -188,9 +188,9 @@
   
   <entry>
     <title type="html"><![CDATA[在ubuntu上安装较新版本的nodejs]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu/"/>
     <updated>2013-12-18T14:21:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu</id>
+    <id>http://blog.xd547.com/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu</id>
     <content type="html"><![CDATA[<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
@@ -217,9 +217,9 @@
   
   <entry>
     <title type="html"><![CDATA[在Ubuntu上使用nginx官方源安装nginx]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu/"/>
     <updated>2013-12-17T21:33:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu</id>
+    <id>http://blog.xd547.com/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu</id>
     <content type="html"><![CDATA[<p>0.添加key</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -265,9 +265,9 @@
   
   <entry>
     <title type="html"><![CDATA[修改git push 后的commit message]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/17/modify-git-commit-msg-after-push/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/17/modify-git-commit-msg-after-push/"/>
     <updated>2013-12-17T16:17:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/17/modify-git-commit-msg-after-push</id>
+    <id>http://blog.xd547.com/blog/2013/12/17/modify-git-commit-msg-after-push</id>
     <content type="html"><![CDATA[<p>背景：手快把一个有拼写错误的commit message给push了  <br/>
 如何：</p>
 
@@ -284,9 +284,9 @@
   
   <entry>
     <title type="html"><![CDATA[修复Firefox下用javascript创建的表单元素无法正确提交的bug]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox/"/>
     <updated>2013-12-01T12:53:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox</id>
+    <id>http://blog.xd547.com/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox</id>
     <content type="html"><![CDATA[<p>项目<a href="https://github.com/xd547/stacktxt">StackTXT</a>
 描述： <br/>
 Firefox下 document.createElement 创建的表单元素无法正确提交(submit)</p>
@@ -330,9 +330,9 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails 中跨控制器的缓存控制（一）]]></title>
-    <link href="http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1/"/>
+    <link href="http://blog.xd547.com/blog/2013/06/22/rails-cross-controller-cache-control-1/"/>
     <updated>2013-06-22T14:55:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1</id>
+    <id>http://blog.xd547.com/blog/2013/06/22/rails-cross-controller-cache-control-1</id>
     <content type="html"><![CDATA[<p>本篇介绍的方法是一个模型（Model）的多个控制器（Controller）中如何使用 Sweeper <br/>
 使用场景：需要后台管理的应用程序中，后台更新信息后，自动清除前台页面的缓存 <br/>
 下面就是具体过程</p>
@@ -438,10 +438,10 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails 中灵活的应用程序设置（二）]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/29/flexible-setting-in-rails-app-2/"/>
     <updated>2013-04-29T16:03:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2</id>
-    <content type="html"><![CDATA[<p>在上一篇<a href="http://xd547.github.io/blog/2013/04/15/flexible-setting-in-rails-app-1/">Ruby on Rails 中灵活的应用程序设置（一）</a>中讲到如何创建一个 AppSettings 的 model 这篇要讲的是在 controller 和 view 中使用 AppSetting<br/>
+    <id>http://blog.xd547.com/blog/2013/04/29/flexible-setting-in-rails-app-2</id>
+    <content type="html"><![CDATA[<p>在上一篇<a href="http://blog.xd547.com/blog/2013/04/15/flexible-setting-in-rails-app-1/">Ruby on Rails 中灵活的应用程序设置（一）</a>中讲到如何创建一个 AppSettings 的 model 这篇要讲的是在 controller 和 view 中使用 AppSetting<br/>
 0.创建 AppSetting Controller</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -630,9 +630,9 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails 中灵活的应用程序设置（一）]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/15/flexible-setting-in-rails-app-1/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/15/flexible-setting-in-rails-app-1/"/>
     <updated>2013-04-15T19:23:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/15/flexible-setting-in-rails-app-1</id>
+    <id>http://blog.xd547.com/blog/2013/04/15/flexible-setting-in-rails-app-1</id>
     <content type="html"><![CDATA[<p>本文介绍的方法以 ActiveRecord 为基础将应用程序的设置存储到数据库中<br/>
 为了方便扩展，设置将以 json 的格式保存到数据库<br/>
 同时设置是全局的，只需要一条数据记录就可以满足需求，于是用到了 singleton pattern<br/>
@@ -806,16 +806,16 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>5.下一篇<a href="http://xd547.github.io/blog/2013/04/29/flexible-setting-in-rails-app-2/">Ruby on Rails 中灵活的应用程序设置（二）</a>将介绍如何在 Controler 和 view 中 使用 AppSetting<br/>
+<p>5.下一篇<a href="http://blog.xd547.com/blog/2013/04/29/flexible-setting-in-rails-app-2/">Ruby on Rails 中灵活的应用程序设置（二）</a>将介绍如何在 Controler 和 view 中 使用 AppSetting<br/>
 参考 <a href="http://stackoverflow.com/questions/399447/how-to-implement-a-singleton-model">1</a></p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails Rspec 测试的上传模拟]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/12/simulate-upload-in-rspec/"/>
     <updated>2013-04-12T10:13:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/12/simulate-upload-in-rspec</id>
+    <id>http://blog.xd547.com/blog/2013/04/12/simulate-upload-in-rspec</id>
     <content type="html"><![CDATA[<p>Rspec 是一个 ruby 的测试框架，在进行 Ruby on Rails 开发时通常都会使用这个框架<br/>
 本文不讨论如何在 Ruby on Rails 中 配置 Rspec<br/>
 0.准备工作</p>
@@ -942,9 +942,9 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   
   <entry>
     <title type="html"><![CDATA[在 Ubuntu 上安装 Rmagick]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/10/install-rmagick-on-ubuntu/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/10/install-rmagick-on-ubuntu/"/>
     <updated>2013-04-10T22:47:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/10/install-rmagick-on-ubuntu</id>
+    <id>http://blog.xd547.com/blog/2013/04/10/install-rmagick-on-ubuntu</id>
     <content type="html"><![CDATA[<p>Rmagick 是 ruby 中处理图片的开发库，在 Ruby on Rails 中经常用来处理图片的输出和验证码。 <br/>
 下面就是如何在 Ubuntu 上 安装 Rmagick。<br/>
 0.安装 ruby 的运行环境，推荐使用 rvm 来管理和使用 ruby。<br/>
@@ -992,9 +992,9 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   
   <entry>
     <title type="html"><![CDATA[Hello world]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/10/hello-world/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/10/hello-world/"/>
     <updated>2013-04-10T11:55:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/10/hello-world</id>
+    <id>http://blog.xd547.com/blog/2013/04/10/hello-world</id>
     <content type="html"><![CDATA[<p>用 Octopress 的 Hello World</p>
 
 <figure class='code'><figcaption><span>Hello World</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>

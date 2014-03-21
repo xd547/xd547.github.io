@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Mac | RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/blog/categories/mac/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[为什么我痛恨Mac]]></title>
-    <link href="http://xd547.github.io/blog/2014/02/25/why-i-hate-mac/"/>
+    <link href="http://blog.xd547.com/blog/2014/02/25/why-i-hate-mac/"/>
     <updated>2014-02-25T16:34:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2014/02/25/why-i-hate-mac</id>
+    <id>http://blog.xd547.com/blog/2014/02/25/why-i-hate-mac</id>
     <content type="html"><![CDATA[<p>我爱Mac，但Mac满满的都是槽点
 1. 我的是rMBP，USB接口少的可怜，才有两个，外接一个机械键盘，外接一个鼠标就没有了（不要告诉用蓝牙的，我也知道） <br/>
 2. 全局输入法切换，写代码的时候和朋友聊天，回到写代码的时候太难受，何况我用的还是vim（是我不懂Mac啊，改个设置就可以了啊） <br/>
@@ -28,9 +28,9 @@
   
   <entry>
     <title type="html"><![CDATA[我喜欢Mac的几个原因]]></title>
-    <link href="http://xd547.github.io/blog/2014/02/25/why-i-love-mac/"/>
+    <link href="http://blog.xd547.com/blog/2014/02/25/why-i-love-mac/"/>
     <updated>2014-02-25T15:58:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2014/02/25/why-i-love-mac</id>
+    <id>http://blog.xd547.com/blog/2014/02/25/why-i-love-mac</id>
     <content type="html"><![CDATA[<p>用了Mac还没有几天，就彻底的爱上Mac了  <br/>
 1. 电源线，非常柔软，不会硬邦邦的戳到改变Mac和插板的位置 <br/>
 2. 不用重启，就算重启，重启以后可以自动回到重启之前的状态 <br/>

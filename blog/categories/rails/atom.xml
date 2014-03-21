@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: rails | RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/blog/categories/rails/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/blog/categories/rails/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[使用through关联时访问关系的属性]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/26/get-association-attributes-using-through/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/26/get-association-attributes-using-through/"/>
     <updated>2013-12-26T21:49:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/26/get-association-attributes-using-through</id>
+    <id>http://blog.xd547.com/blog/2013/12/26/get-association-attributes-using-through</id>
     <content type="html"><![CDATA[<p>0.有下面三个 model 关联，使用 through 来简化对 Ownership 的访问  <br/>
 ```ruby
 class User &lt; ActiveRecord::Base
@@ -73,9 +73,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[rails 小提示]]></title>
-    <link href="http://xd547.github.io/blog/2013/12/26/rails-tips/"/>
+    <link href="http://blog.xd547.com/blog/2013/12/26/rails-tips/"/>
     <updated>2013-12-26T17:23:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/12/26/rails-tips</id>
+    <id>http://blog.xd547.com/blog/2013/12/26/rails-tips</id>
     <content type="html"><![CDATA[<ul>
 <li>重写activerecord 的 method_missing 不是一个好的主意 #rails</li>
 </ul>
@@ -85,9 +85,9 @@ end
   
   <entry>
     <title type="html"><![CDATA[Ruby on Rails 中跨控制器的缓存控制（一）]]></title>
-    <link href="http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1/"/>
+    <link href="http://blog.xd547.com/blog/2013/06/22/rails-cross-controller-cache-control-1/"/>
     <updated>2013-06-22T14:55:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/06/22/rails-cross-controller-cache-control-1</id>
+    <id>http://blog.xd547.com/blog/2013/06/22/rails-cross-controller-cache-control-1</id>
     <content type="html"><![CDATA[<p>本篇介绍的方法是一个模型（Model）的多个控制器（Controller）中如何使用 Sweeper <br/>
 使用场景：需要后台管理的应用程序中，后台更新信息后，自动清除前台页面的缓存 <br/>
 下面就是具体过程</p>

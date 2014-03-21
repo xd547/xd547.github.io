@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Main | RainySummer's New Blog]]></title>
-  <link href="http://xd547.github.io/blog/categories/main/atom.xml" rel="self"/>
-  <link href="http://xd547.github.io/"/>
-  <updated>2014-03-21T11:10:22+08:00</updated>
-  <id>http://xd547.github.io/</id>
+  <link href="http://blog.xd547.com/blog/categories/main/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-21T11:23:09+08:00</updated>
+  <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
     <email><![CDATA[RainySummer@gmail.com]]></email>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Hello world]]></title>
-    <link href="http://xd547.github.io/blog/2013/04/10/hello-world/"/>
+    <link href="http://blog.xd547.com/blog/2013/04/10/hello-world/"/>
     <updated>2013-04-10T11:55:00+08:00</updated>
-    <id>http://xd547.github.io/blog/2013/04/10/hello-world</id>
+    <id>http://blog.xd547.com/blog/2013/04/10/hello-world</id>
     <content type="html"><![CDATA[<p>用 Octopress 的 Hello World
 <code>ruby Hello World
 puts "Hello World"
