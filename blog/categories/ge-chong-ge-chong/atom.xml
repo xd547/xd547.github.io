@@ -4,7 +4,7 @@
   <title><![CDATA[Category: 各种各种 | RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/blog/categories/ge-chong-ge-chong/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-03-28T16:07:58+08:00</updated>
+  <updated>2014-03-28T21:53:39+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/"/>
     <updated>2014-03-28T15:41:00+08:00</updated>
     <id>http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy</id>
-    <content type="html"><![CDATA[<p>0.废话不说，直接上，哦不是，直接用ssh连上服务器
+    <content type="html"><![CDATA[<p>0.废话不说，直接上，哦不是，直接用ssh连上服务器  <br/>
 1.检查python的版本，需要2.6或者2.7，3.0以上没有测试过
 ```bash
 python --version</p>
