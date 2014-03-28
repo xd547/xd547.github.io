@@ -9,12 +9,13 @@
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="Iterrator 有时需要index，那就加入with_index，如下 1
+  <meta name="description" content="0.废话不说，直接上，哦不是，直接用ssh连上服务器
+1.检查python的版本，需要2.6或者2.7，3.0以上没有测试过 1
 2
-3
-4
-f = File.open(&quot;testfile&quot;)
-f.each.with_index do |line, index| puts &quot;Line #{index} is: #{ &hellip;">
+python --version
+# Python 2.7.3 2.安装所需要的python库以及pip 1
+2
+# 之前可以先 sudo apt-get &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -79,6 +80,121 @@ f.each.with_index do |line, index| puts &quot;Line #{index} is: #{ &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/">Shadowsocks Sock5 代理配置－服务端篇</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-03-28T15:41:00+08:00" pubdate data-updated="true">2014-03-28 15:41:00</time>
+        
+         | <a href="/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>0.废话不说，直接上，哦不是，直接用ssh连上服务器
+1.检查python的版本，需要2.6或者2.7，3.0以上没有测试过</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>python --version
+</span><span class='line'><span class="c"># Python 2.7.3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.安装所需要的python库以及pip</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 之前可以先 sudo apt-get update</span>
+</span><span class='line'>sudo apt-get install python-gevent python-m2crypto python-pip
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.安装shadowsocks</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo pip install shadowsocks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.用你喜欢的编辑器创建config.json</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;server&quot;</span><span class="o">:</span><span class="s2">&quot;你的服务器ip&quot;</span><span class="p">,</span> <span class="c1">// 你的服务器ip</span>
+</span><span class='line'>    <span class="s2">&quot;server_port&quot;</span><span class="o">:</span><span class="mi">8388</span><span class="p">,</span>    <span class="c1">// shadowsocks监听的端口，建议修改，如果服务器有防火墙记得打洞</span>
+</span><span class='line'>    <span class="s2">&quot;local_port&quot;</span><span class="o">:</span><span class="mi">1080</span><span class="p">,</span>     <span class="c1">// 服务端不重要</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span><span class="s2">&quot;barfoo!&quot;</span><span class="p">,</span>  <span class="c1">// 加密的密码</span>
+</span><span class='line'>    <span class="s2">&quot;timeout&quot;</span><span class="o">:</span><span class="mi">600</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;method&quot;</span><span class="o">:</span><span class="s2">&quot;aes-256-cfb&quot;</span> <span class="c1">// 加密方式，前面已经安装了python-m2crypto，这里可以选择这个</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>无注释版</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;server&quot;</span><span class="o">:</span><span class="s2">&quot;你的服务器ip&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;server_port&quot;</span><span class="o">:</span><span class="mi">8388</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;local_port&quot;</span><span class="o">:</span><span class="mi">1080</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span><span class="s2">&quot;barfoo!&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;timeout&quot;</span><span class="o">:</span><span class="mi">600</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;method&quot;</span><span class="o">:</span><span class="s2">&quot;aes-256-cfb&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5.开个screen，开启shadowsocks</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>screen -S s
+</span><span class='line'><span class="c"># 注意有3个s</span>
+</span><span class='line'>ssserver -c config.json
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -629,51 +745,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/06/22/rails-cross-controller-cache-control-1/">Ruby on Rails 中跨控制器的缓存控制（一）</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-06-22T14:55:00+08:00" pubdate data-updated="true">2013-06-22 14:55:00</time>
-        
-         | <a href="/blog/2013/06/22/rails-cross-controller-cache-control-1/#disqus_thread">评论</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>本篇介绍的方法是一个模型（Model）的多个控制器（Controller）中如何使用 Sweeper <br/>
-使用场景：需要后台管理的应用程序中，后台更新信息后，自动清除前台页面的缓存 <br/>
-下面就是具体过程</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/06/22/rails-cross-controller-cache-control-1/">阅读全文 &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; 较旧</a>
@@ -689,6 +760,10 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/">Shadowsocks sock5 代理配置－服务端篇</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/02/27/ruby-tricks/">Ruby 小技巧</a>
       </li>
     
@@ -702,10 +777,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
     
       <li class="post">
         <a href="/blog/2013/12/26/get-association-attributes-using-through/">使用through关联时访问关系的属性</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/12/26/rails-tips/">rails 小提示</a>
       </li>
     
   </ul>

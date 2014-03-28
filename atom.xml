@@ -4,7 +4,7 @@
   <title><![CDATA[RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-03-26T09:59:52+08:00</updated>
+  <updated>2014-03-28T16:07:58+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,92 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Shadowsocks sock5 代理配置－服务端篇]]></title>
+    <link href="http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/"/>
+    <updated>2014-03-28T15:41:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy</id>
+    <content type="html"><![CDATA[<p>0.废话不说，直接上，哦不是，直接用ssh连上服务器
+1.检查python的版本，需要2.6或者2.7，3.0以上没有测试过</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>python --version
+</span><span class='line'><span class="c"># Python 2.7.3</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.安装所需要的python库以及pip</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="c"># 之前可以先 sudo apt-get update</span>
+</span><span class='line'>sudo apt-get install python-gevent python-m2crypto python-pip
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.安装shadowsocks</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo pip install shadowsocks
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.用你喜欢的编辑器创建config.json</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;server&quot;</span><span class="o">:</span><span class="s2">&quot;你的服务器ip&quot;</span><span class="p">,</span> <span class="c1">// 你的服务器ip</span>
+</span><span class='line'>    <span class="s2">&quot;server_port&quot;</span><span class="o">:</span><span class="mi">8388</span><span class="p">,</span>    <span class="c1">// shadowsocks监听的端口，建议修改，如果服务器有防火墙记得打洞</span>
+</span><span class='line'>    <span class="s2">&quot;local_port&quot;</span><span class="o">:</span><span class="mi">1080</span><span class="p">,</span>     <span class="c1">// 服务端不重要</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span><span class="s2">&quot;barfoo!&quot;</span><span class="p">,</span>  <span class="c1">// 加密的密码</span>
+</span><span class='line'>    <span class="s2">&quot;timeout&quot;</span><span class="o">:</span><span class="mi">600</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;method&quot;</span><span class="o">:</span><span class="s2">&quot;aes-256-cfb&quot;</span> <span class="c1">// 加密方式，前面已经安装了python-m2crypto，这里可以选择这个</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>无注释版</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="s2">&quot;server&quot;</span><span class="o">:</span><span class="s2">&quot;你的服务器ip&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;server_port&quot;</span><span class="o">:</span><span class="mi">8388</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;local_port&quot;</span><span class="o">:</span><span class="mi">1080</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;password&quot;</span><span class="o">:</span><span class="s2">&quot;barfoo!&quot;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;timeout&quot;</span><span class="o">:</span><span class="mi">600</span><span class="p">,</span>
+</span><span class='line'>    <span class="s2">&quot;method&quot;</span><span class="o">:</span><span class="s2">&quot;aes-256-cfb&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>5.开个screen，开启shadowsocks</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>screen -S s
+</span><span class='line'><span class="c"># 注意有3个s</span>
+</span><span class='line'>ssserver -c config.json
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Ruby 小技巧]]></title>

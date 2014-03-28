@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: 各种各种 | RainySummer's New Blog]]></title>
+  <link href="http://blog.xd547.com/blog/categories/ge-chong-ge-chong/atom.xml" rel="self"/>
+  <link href="http://blog.xd547.com/"/>
+  <updated>2014-03-28T16:07:58+08:00</updated>
+  <id>http://blog.xd547.com/</id>
+  <author>
+    <name><![CDATA[RainySummer]]></name>
+    <email><![CDATA[RainySummer@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Shadowsocks sock5 代理配置－服务端篇]]></title>
+    <link href="http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/"/>
+    <updated>2014-03-28T15:41:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy</id>
+    <content type="html"><![CDATA[<p>0.废话不说，直接上，哦不是，直接用ssh连上服务器
+1.检查python的版本，需要2.6或者2.7，3.0以上没有测试过
+```bash
+python --version</p>
+
+<h1>Python 2.7.3</h1>
+
+<p><code>
+2.安装所需要的python库以及pip
+</code>bash</p>
+
+<h1>之前可以先 sudo apt-get update</h1>
+
+<p>sudo apt-get install python-gevent python-m2crypto python-pip
+<code>
+3.安装shadowsocks
+</code>bash
+sudo pip install shadowsocks
+```</p>
+
+<p>4.用你喜欢的编辑器创建config.json</p>
+
+<p>```javascript
+{</p>
+
+<pre><code>"server":"你的服务器ip", // 你的服务器ip
+"server_port":8388,    // shadowsocks监听的端口，建议修改，如果服务器有防火墙记得打洞
+"local_port":1080,     // 服务端不重要
+"password":"barfoo!",  // 加密的密码
+"timeout":600,
+"method":"aes-256-cfb" // 加密方式，前面已经安装了python-m2crypto，这里可以选择这个
+</code></pre>
+
+<p>}
+<code>
+无注释版
+</code>javascript
+{</p>
+
+<pre><code>"server":"你的服务器ip",
+"server_port":8388,
+"local_port":1080,
+"password":"barfoo!",
+"timeout":600,
+"method":"aes-256-cfb"
+</code></pre>
+
+<p>}
+<code>
+5.开个screen，开启shadowsocks
+</code>bash
+screen -S s</p>
+
+<h1>注意有3个s</h1>
+
+<p>ssserver -c config.json
+```</p>
+]]></content>
+  </entry>
+  
+</feed>
