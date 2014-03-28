@@ -5,7 +5,7 @@ date: 2014-03-28 15:41
 comments: true
 categories: ['各种各种']
 ---
-0.废话不说，直接上，哦不是，直接用ssh连上服务器
+0.废话不说，直接上，哦不是，直接用ssh连上服务器    
 1.检查python的版本，需要2.6或者2.7，3.0以上没有测试过
 ```bash
 python --version
