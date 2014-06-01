@@ -4,7 +4,7 @@
   <title><![CDATA[RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-03-28T21:53:39+08:00</updated>
+  <updated>2014-06-01T19:23:10+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[设计模式读书笔记－0]]></title>
+    <link href="http://blog.xd547.com/blog/2014/05/23/design-patterns-reading-notes-0/"/>
+    <updated>2014-05-23T10:16:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/05/23/design-patterns-reading-notes-0</id>
+    <content type="html"><![CDATA[<p>专门查询了下购买《设计模式——可复用面向对象软件的基础
+（双语版）》的订单，购买时间是2008年（2008-06-12）。开始了很多次，
+每次都只看了开头就放弃了，这次打算好好看完。</p>
+
+<p>终于在六一儿童节这天看完，看得还算轻松。
+以后在设计中可以尝试使用了。
+还好买的是双语版，因为要在短时间之内看完，所以选择先看中文的，
+也许是因为这本书出的比较早，很多术语和现在的翻译很不一样，而且在
+同一本书中，存在翻译不一致的问题，每每这个时候就只好参考下英文版了
+（本人学渣）。</p>
+
+<ul>
+<li>“针对接口编程，而不是针对实现编程”。</li>
+<li>“优先使用对象组合，而不是类继承”。</li>
+<li>预见性，前段时间学车，教练就说，开车要有<strong>预见性</strong>，写程序也是一样，
+面对需求的变化要有预见性，这也就是学习设计模式的意义。</li>
+<li>设计模式的使用不能是为了使用而使用，如果不能够让系统的设计更加完善和灵活
+就没有必要使用。</li>
+<li>一个系统的设计可以先不用设计模式，然后通过设计模式重构。</li>
+</ul>
+
+
+<p>以后会这里记录下使用的心得。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Shadowsocks sock5 代理配置－服务端篇]]></title>
