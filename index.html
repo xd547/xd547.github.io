@@ -9,11 +9,10 @@
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="专门查询了下购买《设计模式——可复用面向对象软件的基础
-（双语版）》的订单，购买时间是2008年（2008-06-12）。开始了很多次，
-每次都只看了开头就放弃了，这次打算好好看完。 终于在六一儿童节这天看完，看得还算轻松。
-以后在设计中可以尝试使用了。
-还好买的是双语版，因为要在短时间之内看完， &hellip;">
+  <meta name="description" content="Apple在昨天的WWDC上发布了新的语言Swift，非常值得一学，
+主要用来做书The Swift Programming Language
+（iBooks）的笔记和一些自己的想法。 Hello,world不用载入其他的库，不需要main函数，不需要分号结尾 1
+println("Hello， &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -78,6 +77,130 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/03/swift-learning-notes-0/">Swift学习笔记0</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-03T09:39:00+08:00" pubdate data-updated="true">2014-06-03 09:39:00</time>
+        
+         | <a href="/blog/2014/06/03/swift-learning-notes-0/#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Apple在昨天的WWDC上发布了新的语言Swift，非常值得一学，
+主要用来做书<a href="https://itunes.apple.com/us/book/the-swift-programming-language/id881256329?mt=11">The Swift Programming Language</a>
+（iBooks）的笔记和一些自己的想法。</p>
+
+<p>Hello,world不用载入其他的库，不需要main函数，不需要分号结尾</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>println("Hello， world")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用<code>var</code>声明变量，用<code>let</code>声明常量,
+编译器根据变量和常量的赋值推断其类型</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var myVariable = 42
+</span><span class='line'>myVariable = 50
+</span><span class='line'>let myConstant = 42</span></code></pre></td></tr></table></div></figure>
+
+
+<p>也可以显式的指定类型</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let explicitDouble: Double = 70</span></code></pre></td></tr></table></div></figure>
+
+
+<p>不能隐式改变类型，要显式改变</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let label = "The width is"
+</span><span class='line'>let width = 94
+</span><span class='line'>let widthLabel = label + String(width)</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>\()</code>内嵌字符串</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let apples = 3
+</span><span class='line'>let oranges= 5
+</span><span class='line'>let appleSummary = "I have \(apples) apples."
+</span><span class='line'>let fruitSummary = "I have \(apples + oranges) pieces of fruit."</span></code></pre></td></tr></table></div></figure>
+
+
+<p>下面这点让我开始喜欢Swift，数组（array）和字典（dictionary）
+统一使用<code>[]</code>创建</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var shoppingList = ["catfish", "water", "tulips", "blue paint"]
+</span><span class='line'>shoppingList[1] = "bottle of water" // 这点可以看出Swift也是从0开始
+</span><span class='line'>
+</span><span class='line'>var occupations = [
+</span><span class='line'>    "Malcolm": "Captain",
+</span><span class='line'>    "Kaylee": "Mechanic",
+</span><span class='line'>]
+</span><span class='line'>occupations["Jayne"] = "Public Relations"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用initializer syntax创建空数组和字典</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let emptyArray = String[]()
+</span><span class='line'>let emptyDictionary = Dictionary&lt;String, Float&gt;()
+</span><span class='line'>// 说明Swift是强类型的，不像脚本语言可以装任意对象在数组和字典里面
+</span><span class='line'>// 字典的key只能使用 String，而不是任何对象</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如果类型可以确定，使用<code>[]</code>创建并重新赋值数组，使用<code>[:]</code>创建并重新赋值字典。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>shoppingList = [] // 已经去购物了，而且东西都买到了，也就是shopping置空</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -707,54 +830,6 @@
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/17/modify-git-commit-msg-after-push/">修改git Push 后的commit Message</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-17T16:17:00+08:00" pubdate data-updated="true">2013-12-17 16:17:00</time>
-        
-         | <a href="/blog/2013/12/17/modify-git-commit-msg-after-push/#disqus_thread">评论</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>背景：手快把一个有拼写错误的commit message给push了  <br/>
-如何：</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>git commit --amend <span class="c">#修改commit message</span>
-</span><span class='line'>git push -f <span class="c">#强制提交，如果不强制提交会被拒绝</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; 较旧</a>
@@ -770,6 +845,10 @@
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/03/swift-learning-notes-0/">Swift学习笔记0</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/05/23/design-patterns-reading-notes-0/">设计模式读书笔记－0</a>
       </li>
     
@@ -783,10 +862,6 @@
     
       <li class="post">
         <a href="/blog/2014/02/25/why-i-hate-mac/">为什么我痛恨Mac</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/25/why-i-love-mac/">我喜欢Mac的几个原因</a>
       </li>
     
   </ul>
