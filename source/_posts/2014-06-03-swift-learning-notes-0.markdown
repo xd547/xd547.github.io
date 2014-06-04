@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Swift学习笔记0"
+title: "Swift学习笔记-0"
 date: 2014-06-03 09:39
 comments: true
 categories: [swift]
