@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-06-04T12:16:41+08:00</updated>
+  <updated>2014-06-05T14:28:16+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,168 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Swift学习笔记-0-流程控制 ]]></title>
+    <link href="http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow/"/>
+    <updated>2014-06-05T09:14:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow</id>
+    <content type="html"><![CDATA[<p>条件语句使用<code>if</code>，<code>switch</code>，循环使用<code>for-in</code>，<code>for</code>，<code>while</code>和<code>do-while</code>，
+条件变量和循环变量的圆括号可选，条件体和循环体必须有花括号。
+```
+let individualScores = [75, 43, 103, 87, 12]</p>
+
+<p>var teamScore = 0</p>
+
+<p>for score in individualScores {</p>
+
+<pre><code>if score &gt; 50 {
+    teamScore += 3
+} else {
+    teamScore += 1
+}
+</code></pre>
+
+<p>}
+teamScore // 11
+```</p>
+
+<p><code>if</code>语句中，条件必须是布尔表达式，也就是说<code>if socre { ... }</code>是错误的，
+没有隐含的0比较.</p>
+
+<p>一个变量可能没有值的时候，<code>if</code>和<code>let</code>可以一起使用，这些值通过
+可选值（optional value）表示。一个可选值要么包含一个值，要么是<code>nil</code>，
+在类型后面加问号（?）就可以把一个值标记为可选值
+```
+var optionalString: String? = "Hello"
+optionalString == nil</p>
+
+<p>var optionalName: String? = "John Appleseed"
+//var optionalName: String? = nil
+var greeting = "Hello!"
+if let name = optionalName {</p>
+
+<pre><code>greeting = "Hello, \(name)"
+</code></pre>
+
+<p>} else {</p>
+
+<pre><code>greeting = "Hello, world"
+</code></pre>
+
+<p>}
+```</p>
+
+<p>可选值为<code>nil</code>条件的结果是<code>false</code>，用<code>let</code>声明的<code>name</code>的作用域
+仅在<code>if-else</code>结构中</p>
+
+<p><code>switch</code>可以使用任何种类的比较数据，而不只是整型数值和相等的比较
+```
+let vegetable = "red pepper"
+switch vegetable {
+case "celery":</p>
+
+<pre><code>let vegetableComment = "Add some raisins and make ants on a log."
+</code></pre>
+
+<p>case "cucumber", "watercress":</p>
+
+<pre><code>let vegetableComment = "That would make a good tea sandwich"
+</code></pre>
+
+<p>case let x where x.hasSuffix("pepper"):</p>
+
+<pre><code>let vegetableComment = "Is it a spicy \(x)?"
+</code></pre>
+
+<p>default:</p>
+
+<pre><code>let vegetableComment = "Everything tastes good in soup"
+</code></pre>
+
+<p>}
+<code>``
+代码执行时如果</code>switch case<code>匹配，</code>switch<code>就会退出，不会执行后面的</code>case<code>，
+所以不必要在每个</code>case<code>结束之后加入</code>break<code>
+要注意的是在</code>switch<code>必须要有一个</code>default`，否则会报错</p>
+
+<p>使用键值对在<code>for-in</code>遍历字典
+```
+let interestingNumbers = [</p>
+
+<pre><code>"Prime": [2, 3, 5, 7, 11, 13],
+"Fibonacci": [1, 1, 2, 3, 5, 8],
+"Square": [1, 4, 9, 16, 25],
+</code></pre>
+
+<p>]</p>
+
+<p>var largest = 0;
+var largestKind = "";
+for (kind, numbers) in interestingNumbers {</p>
+
+<pre><code>for number in numbers {
+    if number &gt; largest {
+        largest = number
+        largestKind = kind
+    }
+}
+</code></pre>
+
+<p>}
+largest      // 25
+largestKind  // Square
+```</p>
+
+<p>用<code>while</code>来执行一段代码直到条件改变，条件可以放在循环的最后（<code>do-while</code>），
+来保证循环至少执行一次
+```
+var n = 2
+while n &lt; 100 {</p>
+
+<pre><code>n = n * 2
+</code></pre>
+
+<p>}</p>
+
+<p>n // 128</p>
+
+<p>var m = 2</p>
+
+<p>do {</p>
+
+<pre><code>m = m * 2
+</code></pre>
+
+<p>} while m &lt; 100
+m // 128
+```</p>
+
+<p>在循环中使用range<code>..</code>或是初始化，条件，增量的形式来获得索引
+```
+var firstForLoop = 0
+for i in 0..3 {</p>
+
+<pre><code>firstForLoop += i
+</code></pre>
+
+<p>}</p>
+
+<p>firstForLoop // 3</p>
+
+<p>var secondForLoop = 0
+for var i = 0; i &lt; 3; ++i {</p>
+
+<pre><code>secondForLoop += 1
+</code></pre>
+
+<p>}
+secondForLoop // 3
+<code>``
+</code>..<code>排除最后一个值
+</code>...`包含最后一个值</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Swift学习笔记-0]]></title>

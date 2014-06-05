@@ -4,7 +4,7 @@
   <title><![CDATA[RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-06-04T12:16:41+08:00</updated>
+  <updated>2014-06-05T14:28:16+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,208 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Swift学习笔记-0-流程控制 ]]></title>
+    <link href="http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow/"/>
+    <updated>2014-06-05T09:14:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow</id>
+    <content type="html"><![CDATA[<p>条件语句使用<code>if</code>，<code>switch</code>，循环使用<code>for-in</code>，<code>for</code>，<code>while</code>和<code>do-while</code>，
+条件变量和循环变量的圆括号可选，条件体和循环体必须有花括号。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let individualScores = [75, 43, 103, 87, 12]
+</span><span class='line'>
+</span><span class='line'>var teamScore = 0
+</span><span class='line'>
+</span><span class='line'>for score in individualScores {
+</span><span class='line'>    if score &gt; 50 {
+</span><span class='line'>        teamScore += 3
+</span><span class='line'>    } else {
+</span><span class='line'>        teamScore += 1
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>teamScore // 11</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>if</code>语句中，条件必须是布尔表达式，也就是说<code>if socre { ... }</code>是错误的，
+没有隐含的0比较.</p>
+
+<p>一个变量可能没有值的时候，<code>if</code>和<code>let</code>可以一起使用，这些值通过
+可选值（optional value）表示。一个可选值要么包含一个值，要么是<code>nil</code>，
+在类型后面加问号（?）就可以把一个值标记为可选值</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var optionalString: String? = "Hello"
+</span><span class='line'>optionalString == nil
+</span><span class='line'>
+</span><span class='line'>var optionalName: String? = "John Appleseed"
+</span><span class='line'>//var optionalName: String? = nil
+</span><span class='line'>var greeting = "Hello!"
+</span><span class='line'>if let name = optionalName {
+</span><span class='line'>    greeting = "Hello, \(name)"
+</span><span class='line'>} else {
+</span><span class='line'>    greeting = "Hello, world"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可选值为<code>nil</code>条件的结果是<code>false</code>，用<code>let</code>声明的<code>name</code>的作用域
+仅在<code>if-else</code>结构中</p>
+
+<p><code>switch</code>可以使用任何种类的比较数据，而不只是整型数值和相等的比较</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let vegetable = "red pepper"
+</span><span class='line'>switch vegetable {
+</span><span class='line'>case "celery":
+</span><span class='line'>    let vegetableComment = "Add some raisins and make ants on a log."
+</span><span class='line'>case "cucumber", "watercress":
+</span><span class='line'>    let vegetableComment = "That would make a good tea sandwich"
+</span><span class='line'>case let x where x.hasSuffix("pepper"):
+</span><span class='line'>    let vegetableComment = "Is it a spicy \(x)?"
+</span><span class='line'>default:
+</span><span class='line'>    let vegetableComment = "Everything tastes good in soup"
+</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+
+
+<p>代码执行时如果<code>switch case</code>匹配，<code>switch</code>就会退出，不会执行后面的<code>case</code>，
+所以不必要在每个<code>case</code>结束之后加入<code>break</code>
+要注意的是在<code>switch</code>必须要有一个<code>default</code>，否则会报错</p>
+
+<p>使用键值对在<code>for-in</code>遍历字典</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let interestingNumbers = [
+</span><span class='line'>    "Prime": [2, 3, 5, 7, 11, 13],
+</span><span class='line'>    "Fibonacci": [1, 1, 2, 3, 5, 8],
+</span><span class='line'>    "Square": [1, 4, 9, 16, 25],
+</span><span class='line'>]
+</span><span class='line'>
+</span><span class='line'>var largest = 0;
+</span><span class='line'>var largestKind = "";
+</span><span class='line'>for (kind, numbers) in interestingNumbers {
+</span><span class='line'>    for number in numbers {
+</span><span class='line'>        if number &gt; largest {
+</span><span class='line'>            largest = number
+</span><span class='line'>            largestKind = kind
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>}
+</span><span class='line'>largest      // 25
+</span><span class='line'>largestKind  // Square</span></code></pre></td></tr></table></div></figure>
+
+
+<p>用<code>while</code>来执行一段代码直到条件改变，条件可以放在循环的最后（<code>do-while</code>），
+来保证循环至少执行一次</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var n = 2
+</span><span class='line'>while n &lt; 100 {
+</span><span class='line'>    n = n * 2
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>n // 128
+</span><span class='line'>
+</span><span class='line'>var m = 2
+</span><span class='line'>
+</span><span class='line'>do {
+</span><span class='line'>    m = m * 2
+</span><span class='line'>} while m &lt; 100
+</span><span class='line'>m // 128</span></code></pre></td></tr></table></div></figure>
+
+
+<p>在循环中使用range<code>..</code>或是初始化，条件，增量的形式来获得索引</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>var firstForLoop = 0
+</span><span class='line'>for i in 0..3 {
+</span><span class='line'>    firstForLoop += i
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>firstForLoop // 3
+</span><span class='line'>
+</span><span class='line'>var secondForLoop = 0
+</span><span class='line'>for var i = 0; i &lt; 3; ++i {
+</span><span class='line'>    secondForLoop += 1
+</span><span class='line'>}
+</span><span class='line'>secondForLoop // 3</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>..</code>排除最后一个值
+<code>...</code>包含最后一个值</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Swift学习笔记-0]]></title>

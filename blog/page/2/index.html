@@ -9,10 +9,9 @@
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="背景：手快把一个有拼写错误的commit message给push了 如何： 1
-2
-git commit --amend #修改commit message
-git push -f #强制提交，如果不强制提交会被拒绝 ">
+  <meta name="description" content="0.添加key 1
+sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62 1.添加到nginx官方源到 /etc/apt/sources.list 1
+deb http://nginx.org/ &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -77,6 +76,83 @@ git push -f #强制提交，如果不强制提交会被拒绝 ">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu/">在Ubuntu上使用nginx官方源安装nginx</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-17T21:33:00+08:00" pubdate data-updated="true">2013-12-17 21:33:00</time>
+        
+         | <a href="/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu/#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>0.添加key</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys ABF5BD827BD9BF62
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.添加到nginx官方源到 <code>/etc/apt/sources.list</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>deb http://nginx.org/packages/ubuntu/ precise nginx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.如果原来安装过nginx，备份相关配置文件后删除nginx及其相关组件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get purge nginx*
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.安装nginx</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get update
+</span><span class='line'>sudo apt-get install nginx
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>4.安装成功后可以用-v查看ningx版本</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>nginx -v
+</span><span class='line'><span class="c">#nginx version: nginx/1.4.4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>来源：<a href="http://ruby-journal.com/how-to-setup-rails-app-with-puma-and-nginx/">How to Setup Rails App With Puma and NGINX</a></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -641,6 +717,10 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/05/swift-learning-notes-1-control-flow/">Swift学习笔记-0-流程控制 </a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/03/swift-learning-notes-0/">Swift学习笔记-0</a>
       </li>
     
@@ -654,10 +734,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
     
       <li class="post">
         <a href="/blog/2014/02/27/ruby-tricks/">Ruby 小技巧</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/25/why-i-hate-mac/">为什么我痛恨Mac</a>
       </li>
     
   </ul>
