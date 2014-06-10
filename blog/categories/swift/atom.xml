@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-06-05T14:29:32+08:00</updated>
+  <updated>2014-06-10T22:23:19+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,134 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Swift学习笔记-1-函数和闭包]]></title>
+    <link href="http://blog.xd547.com/blog/2014/06/10/swift-learning-notes-2-functions-closures/"/>
+    <updated>2014-06-10T21:10:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/06/10/swift-learning-notes-2-functions-closures</id>
+    <content type="html"><![CDATA[<p>使用<code>func</code>定义函数，通过函数名和参数列表来调用函数，
+使用<code>-&gt;</code>分割参数列表和返回类型
+```
+func greet(name: String, day: String) -> String {</p>
+
+<pre><code>return "Hello \(name), today is \(day)"
+</code></pre>
+
+<p>}
+greet("Bob", "Tuesday")
+<code>
+使用元组（tuple）返回多个值
+</code>
+func getGasPrices -> (Double, Double, Double) {</p>
+
+<pre><code>return (3.59, 3.69, 3.79)
+</code></pre>
+
+<p>}
+// 还不知道如何获得返回值，会补上
+getGasPrices()
+<code>
+函数的变长参数会保存在指定名字的数组中
+</code>
+func sumOf(numbers:Int...) -> Int {</p>
+
+<pre><code>var sum = 0
+for number in numbers {
+    sum += number
+}
+
+return sum
+</code></pre>
+
+<p>}
+sumOf()            // 0
+sumOf(42, 597, 12) // 651
+<code>
+可以使用嵌套函数，嵌套的函数可以访问它所嵌入函数中所的声明的变量。
+函数太长或是太复杂的情况下可以使用嵌套函数来组织代码。
+</code>
+func returnFifteen() -> Int {</p>
+
+<pre><code>var y = 0
+func add() {
+    y += 5
+}
+add()
+
+return y
+</code></pre>
+
+<p>}
+returnFifteen() // 5
+<code>
+函数是一等类型，这意味着可以把函数当做另一个函数的返回值
+</code>
+// 返回类型的解释是：返回 一个接受整形参数返回整形的函数
+func makeIncrementer() -> (Int -> Int) {</p>
+
+<pre><code>func addOne(number:Int) -&gt;Int {
+    return 1 + number
+}
+
+return addOne
+</code></pre>
+
+<p>}
+var increment = makeIncrementer()
+increment(7) // 8
+<code>
+也意味着函数可以作为另一个函数的参数
+</code>
+func hasAnyMathces(list:Int[], condition:Int -> Bool) -> Bool {</p>
+
+<pre><code>for item in list {
+    if condition(item) {
+        return true
+    }
+}
+return false
+</code></pre>
+
+<p>}</p>
+
+<p>func lessThanTen(number:Int) -> Bool {</p>
+
+<pre><code>return number &lt; 10
+</code></pre>
+
+<p>}
+var numbers = [20, 19, 7, 12]
+hasAnyMathces(numbers, lessThanTen) // true
+<code>
+函数是闭包的特例，闭包没有名字，使用花括号（`{}`）包围，
+使用`in`来分割参数列表返回类型与主体
+</code>
+...
+numbers.map({</p>
+
+<pre><code>(number:Int) -&gt; Int in
+let result = 3 * number
+return result
+})
+</code></pre>
+
+<p>// [60, 57, 21, 36]
+<code>
+有几个方法可以简化闭包，当闭包的类型是已知时
+（如：委托（delegate）的回调（callback）），可以省略参数的类型，
+返回类型，返回语句。而返回值隐含的包含在闭包唯一的语句之中
+</code>
+// [60, 57, 21, 36]
+numbers.map({ number in 3 * number })
+<code>
+使用参数的序号代替参数名，即可写出超短的闭包，
+闭包可以作为函数的最后一个参数
+</code>
+sort([1, 5, 3, 12, 2]) { $0 > $1 } // [12, 5, 3, 2, 1]
+```</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Swift学习笔记-1-流程控制 ]]></title>

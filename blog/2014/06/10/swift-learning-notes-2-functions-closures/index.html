@@ -5,24 +5,16 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Swift学习笔记-1-流程控制  - RainySummer's New Blog</title>
+  <title>Swift学习笔记-1-函数和闭包 - RainySummer's New Blog</title>
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="条件语句使用if，switch，循环使用for-in，for，while和do-while，
-条件变量和循环变量的圆括号可选，条件体和循环体必须有花括号。 1
+  <meta name="description" content="使用func定义函数，通过函数名和参数列表来调用函数，
+使用-&gt;分割参数列表和返回类型 1
 2
 3
 4
-5
-6
-7
-8
-9
-10
-11
-12
-let individualScores = [75, 43, 103, 87, 12 &hellip;">
+func greet(name: String, day: String) -&gt; String { return "Hello \(name), today is \(day &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -31,7 +23,7 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow">
+  <link rel="canonical" href="http://blog.xd547.com/blog/2014/06/10/swift-learning-notes-2-functions-closures">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="RainySummer's New Blog" type="application/atom+xml">
@@ -90,7 +82,7 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
   
   <header>
     
-      <h1 class="entry-title">Swift学习笔记-1-流程控制</h1>
+      <h1 class="entry-title">Swift学习笔记-1-函数和闭包</h1>
     
     
       <p class="meta">
@@ -106,7 +98,7 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
   
 
 
-<time datetime="2014-06-05T09:14:00+08:00" pubdate data-updated="true">2014-06-05 09:14:00</time>
+<time datetime="2014-06-10T21:10:00+08:00" pubdate data-updated="true">2014-06-10 21:10:00</time>
         
          | <a href="#disqus_thread">评论</a>
         
@@ -115,41 +107,34 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
   </header>
 
 
-<div class="entry-content"><p>条件语句使用<code>if</code>，<code>switch</code>，循环使用<code>for-in</code>，<code>for</code>，<code>while</code>和<code>do-while</code>，
-条件变量和循环变量的圆括号可选，条件体和循环体必须有花括号。</p>
+<div class="entry-content"><p>使用<code>func</code>定义函数，通过函数名和参数列表来调用函数，
+使用<code>-&gt;</code>分割参数列表和返回类型</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let individualScores = [75, 43, 103, 87, 12]
-</span><span class='line'>
-</span><span class='line'>var teamScore = 0
-</span><span class='line'>
-</span><span class='line'>for score in individualScores {
-</span><span class='line'>    if score &gt; 50 {
-</span><span class='line'>        teamScore += 3
-</span><span class='line'>    } else {
-</span><span class='line'>        teamScore += 1
-</span><span class='line'>    }
+</pre></td><td class='code'><pre><code class=''><span class='line'>func greet(name: String, day: String) -&gt; String {
+</span><span class='line'>    return "Hello \(name), today is \(day)"
 </span><span class='line'>}
-</span><span class='line'>teamScore // 11</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>greet("Bob", "Tuesday")</span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>if</code>语句中，条件必须是布尔表达式，也就是说<code>if socre { ... }</code>是错误的，
-没有隐含的0比较.</p>
+<p>使用元组（tuple）返回多个值</p>
 
-<p>一个变量可能没有值的时候，<code>if</code>和<code>let</code>可以一起使用，这些值通过
-可选值（optional value）表示。一个可选值要么包含一个值，要么是<code>nil</code>，
-在类型后面加问号（?）就可以把一个值标记为可选值</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func getGasPrices -&gt; (Double, Double, Double) {
+</span><span class='line'>    return (3.59, 3.69, 3.79)
+</span><span class='line'>}
+</span><span class='line'>// 还不知道如何获得返回值，会补上
+</span><span class='line'>getGasPrices()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数的变长参数会保存在指定名字的数组中</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -161,24 +146,20 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var optionalString: String? = "Hello"
-</span><span class='line'>optionalString == nil
+</pre></td><td class='code'><pre><code class=''><span class='line'>func sumOf(numbers:Int...) -&gt; Int {
+</span><span class='line'>    var sum = 0
+</span><span class='line'>    for number in numbers {
+</span><span class='line'>        sum += number
+</span><span class='line'>    }
 </span><span class='line'>
-</span><span class='line'>var optionalName: String? = "John Appleseed"
-</span><span class='line'>//var optionalName: String? = nil
-</span><span class='line'>var greeting = "Hello!"
-</span><span class='line'>if let name = optionalName {
-</span><span class='line'>    greeting = "Hello, \(name)"
-</span><span class='line'>} else {
-</span><span class='line'>    greeting = "Hello, world"
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>    return sum
+</span><span class='line'>}
+</span><span class='line'>sumOf()            // 0
+</span><span class='line'>sumOf(42, 597, 12) // 651</span></code></pre></td></tr></table></div></figure>
 
 
-<p>可选值为<code>nil</code>条件的结果是<code>false</code>，用<code>let</code>声明的<code>name</code>的作用域
-仅在<code>if-else</code>结构中</p>
-
-<p><code>switch</code>可以使用任何种类的比较数据，而不只是整型数值和相等的比较</p>
+<p>可以使用嵌套函数，嵌套的函数可以访问它所嵌入函数中所的声明的变量。
+函数太长或是太复杂的情况下可以使用嵌套函数来组织代码。</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -190,25 +171,43 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let vegetable = "red pepper"
-</span><span class='line'>switch vegetable {
-</span><span class='line'>case "celery":
-</span><span class='line'>    let vegetableComment = "Add some raisins and make ants on a log."
-</span><span class='line'>case "cucumber", "watercress":
-</span><span class='line'>    let vegetableComment = "That would make a good tea sandwich"
-</span><span class='line'>case let x where x.hasSuffix("pepper"):
-</span><span class='line'>    let vegetableComment = "Is it a spicy \(x)?"
-</span><span class='line'>default:
-</span><span class='line'>    let vegetableComment = "Everything tastes good in soup"
-</span><span class='line'>}</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func returnFifteen() -&gt; Int {
+</span><span class='line'>    var y = 0
+</span><span class='line'>    func add() {
+</span><span class='line'>        y += 5
+</span><span class='line'>    }
+</span><span class='line'>    add()
+</span><span class='line'>
+</span><span class='line'>    return y
+</span><span class='line'>}
+</span><span class='line'>returnFifteen() // 5</span></code></pre></td></tr></table></div></figure>
 
 
-<p>代码执行时如果<code>switch case</code>匹配，<code>switch</code>就会退出，不会执行后面的<code>case</code>，
-所以不必要在每个<code>case</code>结束之后加入<code>break</code>
-要注意的是在<code>switch</code>必须要有一个<code>default</code>，否则会报错</p>
+<p>函数是一等类型，这意味着可以把函数当做另一个函数的返回值</p>
 
-<p>使用键值对在<code>for-in</code>遍历字典</p>
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 返回类型的解释是：返回 一个接受整形参数返回整形的函数
+</span><span class='line'>func makeIncrementer() -&gt; (Int -&gt; Int) {
+</span><span class='line'>    func addOne(number:Int) -&gt;Int {
+</span><span class='line'>        return 1 + number
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    return addOne
+</span><span class='line'>}
+</span><span class='line'>var increment = makeIncrementer()
+</span><span class='line'>increment(7) // 8</span></code></pre></td></tr></table></div></figure>
+
+
+<p>也意味着函数可以作为另一个函数的参数</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -224,32 +223,24 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
 <span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let interestingNumbers = [
-</span><span class='line'>    "Prime": [2, 3, 5, 7, 11, 13],
-</span><span class='line'>    "Fibonacci": [1, 1, 2, 3, 5, 8],
-</span><span class='line'>    "Square": [1, 4, 9, 16, 25],
-</span><span class='line'>]
-</span><span class='line'>
-</span><span class='line'>var largest = 0;
-</span><span class='line'>var largestKind = "";
-</span><span class='line'>for (kind, numbers) in interestingNumbers {
-</span><span class='line'>    for number in numbers {
-</span><span class='line'>        if number &gt; largest {
-</span><span class='line'>            largest = number
-</span><span class='line'>            largestKind = kind
+</pre></td><td class='code'><pre><code class=''><span class='line'>func hasAnyMathces(list:Int[], condition:Int -&gt; Bool) -&gt; Bool {
+</span><span class='line'>    for item in list {
+</span><span class='line'>        if condition(item) {
+</span><span class='line'>            return true
 </span><span class='line'>        }
 </span><span class='line'>    }
+</span><span class='line'>    return false
 </span><span class='line'>}
-</span><span class='line'>largest      // 25
-</span><span class='line'>largestKind  // Square</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>
+</span><span class='line'>func lessThanTen(number:Int) -&gt; Bool {
+</span><span class='line'>    return number &lt; 10
+</span><span class='line'>}
+</span><span class='line'>var numbers = [20, 19, 7, 12]
+</span><span class='line'>hasAnyMathces(numbers, lessThanTen) // true</span></code></pre></td></tr></table></div></figure>
 
 
-<p>用<code>while</code>来执行一段代码直到条件改变，条件可以放在循环的最后（<code>do-while</code>），
-来保证循环至少执行一次</p>
+<p>函数是闭包的特例，闭包没有名字，使用花括号（<code>{}</code>）包围，
+使用<code>in</code>来分割参数列表返回类型与主体</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -258,57 +249,31 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var n = 2
-</span><span class='line'>while n &lt; 100 {
-</span><span class='line'>    n = n * 2
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>n // 128
-</span><span class='line'>
-</span><span class='line'>var m = 2
-</span><span class='line'>
-</span><span class='line'>do {
-</span><span class='line'>    m = m * 2
-</span><span class='line'>} while m &lt; 100
-</span><span class='line'>m // 128</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...
+</span><span class='line'>numbers.map({
+</span><span class='line'>    (number:Int) -&gt; Int in
+</span><span class='line'>    let result = 3 * number
+</span><span class='line'>    return result
+</span><span class='line'>    })
+</span><span class='line'>// [60, 57, 21, 36]</span></code></pre></td></tr></table></div></figure>
 
 
-<p>在循环中使用range<code>..</code>或是初始化，条件，增量的形式来获得索引</p>
+<p>有几个方法可以简化闭包，当闭包的类型是已知时
+（如：委托（delegate）的回调（callback）），可以省略参数的类型，
+返回类型，返回语句。而返回值隐含的包含在闭包唯一的语句之中</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>var firstForLoop = 0
-</span><span class='line'>for i in 0..3 {
-</span><span class='line'>    firstForLoop += i
-</span><span class='line'>}
-</span><span class='line'>
-</span><span class='line'>firstForLoop // 3
-</span><span class='line'>
-</span><span class='line'>var secondForLoop = 0
-</span><span class='line'>for var i = 0; i &lt; 3; ++i {
-</span><span class='line'>    secondForLoop += 1
-</span><span class='line'>}
-</span><span class='line'>secondForLoop // 3</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// [60, 57, 21, 36]
+</span><span class='line'>numbers.map({ number in 3 * number })</span></code></pre></td></tr></table></div></figure>
 
 
-<p><code>..</code>排除最后一个值
-<code>...</code>包含最后一个值</p>
+<p>使用参数的序号代替参数名，即可写出超短的闭包，
+闭包可以作为函数的最后一个参数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sort([1, 5, 3, 12, 2]) { $0 &gt; $1 } // [12, 5, 3, 2, 1]</span></code></pre></td></tr></table></div></figure>
+
 </div>
 
 
@@ -331,7 +296,7 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
   
 
 
-<time datetime="2014-06-05T09:14:00+08:00" pubdate data-updated="true">2014-06-05 09:14:00</time>
+<time datetime="2014-06-10T21:10:00+08:00" pubdate data-updated="true">2014-06-10 21:10:00</time>
       
 
 <span class="categories">
@@ -352,10 +317,8 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/blog/2014/06/03/swift-learning-notes-0/" title="Previous Post: Swift学习笔记-0">&laquo; Swift学习笔记-0</a>
+        <a class="basic-alignment left" href="/blog/2014/06/05/swift-learning-notes-1-control-flow/" title="Previous Post: Swift学习笔记-1-流程控制 ">&laquo; Swift学习笔记-1-流程控制 </a>
       
-      
-        <a class="basic-alignment right" href="/blog/2014/06/10/swift-learning-notes-2-functions-closures/" title="Next Post: Swift学习笔记-1-函数和闭包">Swift学习笔记-1-函数和闭包 &raquo;</a>
       
     </p>
   </footer>
@@ -424,8 +387,8 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow/';
-        var disqus_url = 'http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow/';
+        var disqus_identifier = 'http://blog.xd547.com/blog/2014/06/10/swift-learning-notes-2-functions-closures/';
+        var disqus_url = 'http://blog.xd547.com/blog/2014/06/10/swift-learning-notes-2-functions-closures/';
         var disqus_script = 'embed.js';
         (function () {
           var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;

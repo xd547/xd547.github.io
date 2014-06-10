@@ -9,20 +9,12 @@
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="条件语句使用if，switch，循环使用for-in，for，while和do-while，
-条件变量和循环变量的圆括号可选，条件体和循环体必须有花括号。 1
+  <meta name="description" content="使用func定义函数，通过函数名和参数列表来调用函数，
+使用-&gt;分割参数列表和返回类型 1
 2
 3
 4
-5
-6
-7
-8
-9
-10
-11
-12
-let individualScores = [75, 43, 103, 87, 12 &hellip;">
+func greet(name: String, day: String) -&gt; String { return "Hello \(name), today is \(day &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -87,6 +79,210 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/10/swift-learning-notes-2-functions-closures/">Swift学习笔记-1-函数和闭包</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-10T21:10:00+08:00" pubdate data-updated="true">2014-06-10 21:10:00</time>
+        
+         | <a href="/blog/2014/06/10/swift-learning-notes-2-functions-closures/#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>使用<code>func</code>定义函数，通过函数名和参数列表来调用函数，
+使用<code>-&gt;</code>分割参数列表和返回类型</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func greet(name: String, day: String) -&gt; String {
+</span><span class='line'>    return "Hello \(name), today is \(day)"
+</span><span class='line'>}
+</span><span class='line'>greet("Bob", "Tuesday")</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用元组（tuple）返回多个值</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func getGasPrices -&gt; (Double, Double, Double) {
+</span><span class='line'>    return (3.59, 3.69, 3.79)
+</span><span class='line'>}
+</span><span class='line'>// 还不知道如何获得返回值，会补上
+</span><span class='line'>getGasPrices()</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数的变长参数会保存在指定名字的数组中</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func sumOf(numbers:Int...) -&gt; Int {
+</span><span class='line'>    var sum = 0
+</span><span class='line'>    for number in numbers {
+</span><span class='line'>        sum += number
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    return sum
+</span><span class='line'>}
+</span><span class='line'>sumOf()            // 0
+</span><span class='line'>sumOf(42, 597, 12) // 651</span></code></pre></td></tr></table></div></figure>
+
+
+<p>可以使用嵌套函数，嵌套的函数可以访问它所嵌入函数中所的声明的变量。
+函数太长或是太复杂的情况下可以使用嵌套函数来组织代码。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func returnFifteen() -&gt; Int {
+</span><span class='line'>    var y = 0
+</span><span class='line'>    func add() {
+</span><span class='line'>        y += 5
+</span><span class='line'>    }
+</span><span class='line'>    add()
+</span><span class='line'>
+</span><span class='line'>    return y
+</span><span class='line'>}
+</span><span class='line'>returnFifteen() // 5</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数是一等类型，这意味着可以把函数当做另一个函数的返回值</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// 返回类型的解释是：返回 一个接受整形参数返回整形的函数
+</span><span class='line'>func makeIncrementer() -&gt; (Int -&gt; Int) {
+</span><span class='line'>    func addOne(number:Int) -&gt;Int {
+</span><span class='line'>        return 1 + number
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    return addOne
+</span><span class='line'>}
+</span><span class='line'>var increment = makeIncrementer()
+</span><span class='line'>increment(7) // 8</span></code></pre></td></tr></table></div></figure>
+
+
+<p>也意味着函数可以作为另一个函数的参数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>func hasAnyMathces(list:Int[], condition:Int -&gt; Bool) -&gt; Bool {
+</span><span class='line'>    for item in list {
+</span><span class='line'>        if condition(item) {
+</span><span class='line'>            return true
+</span><span class='line'>        }
+</span><span class='line'>    }
+</span><span class='line'>    return false
+</span><span class='line'>}
+</span><span class='line'>
+</span><span class='line'>func lessThanTen(number:Int) -&gt; Bool {
+</span><span class='line'>    return number &lt; 10
+</span><span class='line'>}
+</span><span class='line'>var numbers = [20, 19, 7, 12]
+</span><span class='line'>hasAnyMathces(numbers, lessThanTen) // true</span></code></pre></td></tr></table></div></figure>
+
+
+<p>函数是闭包的特例，闭包没有名字，使用花括号（<code>{}</code>）包围，
+使用<code>in</code>来分割参数列表返回类型与主体</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>...
+</span><span class='line'>numbers.map({
+</span><span class='line'>    (number:Int) -&gt; Int in
+</span><span class='line'>    let result = 3 * number
+</span><span class='line'>    return result
+</span><span class='line'>    })
+</span><span class='line'>// [60, 57, 21, 36]</span></code></pre></td></tr></table></div></figure>
+
+
+<p>有几个方法可以简化闭包，当闭包的类型是已知时
+（如：委托（delegate）的回调（callback）），可以省略参数的类型，
+返回类型，返回语句。而返回值隐含的包含在闭包唯一的语句之中</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>// [60, 57, 21, 36]
+</span><span class='line'>numbers.map({ number in 3 * number })</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使用参数的序号代替参数名，即可写出超短的闭包，
+闭包可以作为函数的最后一个参数</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sort([1, 5, 3, 12, 2]) { $0 &gt; $1 } // [12, 5, 3, 2, 1]</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -936,64 +1132,6 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu/">在ubuntu上安装较新版本的nodejs</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-18T14:21:00+08:00" pubdate data-updated="true">2013-12-18 14:21:00</time>
-        
-         | <a href="/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu/#disqus_thread">评论</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get update
-</span><span class='line'>sudo apt-get install -y python-software-properties python g++ make
-</span><span class='line'>sudo add-apt-repository -y ppa:chris-lea/node.js
-</span><span class='line'>sudo apt-get update
-</span><span class='line'>sudo apt-get install nodejs
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>因为用到 <code>add-apt-repository</code> 可能需要安装 <code>software-properties-common</code></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install software-properties-common
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>来源：<a href="https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager#ubuntu-mint-elementary-os">Installing Node.js via package manager</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; 较旧</a>
@@ -1009,6 +1147,10 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/06/10/swift-learning-notes-2-functions-closures/">Swift学习笔记-1-函数和闭包</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/05/swift-learning-notes-1-control-flow/">Swift学习笔记-1-流程控制 </a>
       </li>
     
@@ -1022,10 +1164,6 @@ let individualScores = [75, 43, 103, 87, 12 &hellip;">
     
       <li class="post">
         <a href="/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/">Shadowsocks sock5 代理配置－服务端篇</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/02/27/ruby-tricks/">Ruby 小技巧</a>
       </li>
     
   </ul>
