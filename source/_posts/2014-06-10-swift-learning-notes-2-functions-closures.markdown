@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Swift学习笔记-1-函数和闭包"
+title: "Swift学习笔记-2-函数和闭包"
 date: 2014-06-10 21:10
 comments: true
 categories: [swift]
