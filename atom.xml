@@ -4,7 +4,7 @@
   <title><![CDATA[RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-06-10T22:24:15+08:00</updated>
+  <updated>2014-06-19T16:15:12+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,437 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[如何在Ubuntu 12.04 LTS 上安装L2TP Server]]></title>
+    <link href="http://blog.xd547.com/blog/2014/06/19/how-to-install-l2tp-on-ubuntu-12-04/"/>
+    <updated>2014-06-19T15:20:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/06/19/how-to-install-l2tp-on-ubuntu-12-04</id>
+    <content type="html"><![CDATA[<h3>安装必要组件</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install xl2tpd openswan ppp
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>IPSec / Openswan</h3>
+
+<ul>
+<li>拷贝下面内容到 <code>/etc/ipsec.conf</code>，
+并把其中的<code>x.x.x.x</code>替换为你服务器的ip</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>config setup
+</span><span class='line'>    <span class="nv">nat_traversal</span><span class="o">=</span>yes
+</span><span class='line'>    <span class="nv">virtual_private</span><span class="o">=</span>%v4:10.0.0.0/8,%v4:192.168.0.0/16,%v4:172.16.0.0/12,%v4:!10.152.2.0/24
+</span><span class='line'>    <span class="c">#contains the networks that are allowed as subnet= for the remote client. In other words, the address ranges that may live behind a NAT router through which a client connects.</span>
+</span><span class='line'>    <span class="nv">oe</span><span class="o">=</span>off
+</span><span class='line'>    <span class="nv">protostack</span><span class="o">=</span>netkey
+</span><span class='line'>
+</span><span class='line'>conn L2TP-PSK-NAT
+</span><span class='line'>    <span class="nv">rightsubnet</span><span class="o">=</span>vhost:%priv
+</span><span class='line'>    <span class="nv">also</span><span class="o">=</span>L2TP-PSK-noNAT
+</span><span class='line'>
+</span><span class='line'>conn L2TP-PSK-noNAT
+</span><span class='line'>    <span class="nv">authby</span><span class="o">=</span>secret
+</span><span class='line'>    <span class="nv">pfs</span><span class="o">=</span>no
+</span><span class='line'>    <span class="nv">auto</span><span class="o">=</span>add
+</span><span class='line'>    <span class="nv">keyingtries</span><span class="o">=</span>3
+</span><span class='line'>    <span class="nv">rekey</span><span class="o">=</span>no
+</span><span class='line'>    <span class="c"># Apple iOS doesn&#39;t send delete notify so we need dead peer detection</span>
+</span><span class='line'>    <span class="c"># to detect vanishing clients</span>
+</span><span class='line'>    <span class="nv">dpddelay</span><span class="o">=</span>30
+</span><span class='line'>    <span class="nv">dpdtimeout</span><span class="o">=</span>120
+</span><span class='line'>    <span class="nv">dpdaction</span><span class="o">=</span>clear
+</span><span class='line'>    <span class="c"># Set ikelifetime and keylife to same defaults windows has</span>
+</span><span class='line'>    <span class="nv">ikelifetime</span><span class="o">=</span>8h
+</span><span class='line'>    <span class="nv">keylife</span><span class="o">=</span>1h
+</span><span class='line'>    <span class="nb">type</span><span class="o">=</span>transport
+</span><span class='line'>    <span class="c"># Replace IP address with your local IP (private, behind NAT IP is okay as well)</span>
+</span><span class='line'>    <span class="nv">left</span><span class="o">=</span>x.x.x.x
+</span><span class='line'>    <span class="c"># For updated Windows 2000/XP clients,</span>
+</span><span class='line'>    <span class="c"># to support old clients as well, use leftprotoport=17/%any</span>
+</span><span class='line'>    <span class="nv">leftprotoport</span><span class="o">=</span>17/1701
+</span><span class='line'>    <span class="nv">right</span><span class="o">=</span>%any
+</span><span class='line'>    <span class="nv">rightprotoport</span><span class="o">=</span>17/%any
+</span><span class='line'>    <span class="c">#force all to be nat&#39;ed. because of iOS</span>
+</span><span class='line'>    <span class="nv">forceencaps</span><span class="o">=</span>yes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>拷贝下面内容到 <code>/etc/ipsec.secrets</code>，
+并把其中的<code>x.x.x.x</code>替换为你服务器的ip</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>x.x.x.x   %any:  PSK <span class="s2">&quot;somegoodpassword&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>开启ipsec服务</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>/etc/init.d/ipsec start
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>执行下面脚本</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">for </span>each in /proc/sys/net/ipv4/conf/*
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/accept_redirects
+</span><span class='line'><span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/send_redirects
+</span><span class='line'><span class="k">done</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>验证ipsec服务</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo ipsec verify
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>不能出现任何错误</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Checking your system to see <span class="k">if </span>IPsec got installed and started correctly:
+</span><span class='line'>Version check and ipsec on-path                                 <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Linux Openswan U2.6.28/K2.6.32-32-generic-pae <span class="o">(</span>netkey<span class="o">)</span>
+</span><span class='line'>Checking <span class="k">for </span>IPsec support in kernel                            <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>NETKEY detected, testing <span class="k">for </span>disabled ICMP send_redirects       <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>NETKEY detected, testing <span class="k">for </span>disabled ICMP accept_redirects     <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Checking that pluto is running                                  <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Pluto listening <span class="k">for </span>IKE on udp 500                              <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Pluto listening <span class="k">for </span>NAT-T on udp 4500                           <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Checking <span class="k">for</span> <span class="s1">&#39;ip&#39;</span> <span class="nb">command</span>                                       <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Checking <span class="k">for</span> <span class="s1">&#39;iptables&#39;</span> <span class="nb">command</span>                                 <span class="o">[</span>OK<span class="o">]</span>
+</span><span class='line'>Opportunistic Encryption Support                                <span class="o">[</span>DISABLED<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>创建<code>/etc/init.d/ipsec.vpn</code>的启动脚本</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+</span><span class='line'>  start<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Starting my Ipsec VPN&quot;</span>
+</span><span class='line'>iptables  -t nat   -A POSTROUTING -o eth0 -s 10.152.2.0/24 -j MASQUERADE
+</span><span class='line'><span class="nb">echo </span>1 &gt; /proc/sys/net/ipv4/ip_forward
+</span><span class='line'><span class="k">for </span>each in /proc/sys/net/ipv4/conf/*
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/accept_redirects
+</span><span class='line'>    <span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/send_redirects
+</span><span class='line'><span class="k">done</span>
+</span><span class='line'>/etc/init.d/ipsec start
+</span><span class='line'>/etc/init.d/xl2tpd start
+</span><span class='line'>;;
+</span><span class='line'>stop<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Stopping my Ipsec VPN&quot;</span>
+</span><span class='line'>iptables --table nat --flush
+</span><span class='line'><span class="nb">echo </span>0 &gt; /proc/sys/net/ipv4/ip_forward
+</span><span class='line'>/etc/init.d/ipsec stop
+</span><span class='line'>/etc/init.d/xl2tpd stop
+</span><span class='line'>;;
+</span><span class='line'>restart<span class="o">)</span>
+</span><span class='line'><span class="nb">echo</span> <span class="s2">&quot;Restarting my Ipsec VPN&quot;</span>
+</span><span class='line'>iptables  -t nat   -A POSTROUTING -o eth0 -s 10.152.2.0/24 -j MASQUERADE
+</span><span class='line'><span class="nb">echo </span>1 &gt; /proc/sys/net/ipv4/ip_forward
+</span><span class='line'><span class="k">for </span>each in /proc/sys/net/ipv4/conf/*
+</span><span class='line'><span class="k">do</span>
+</span><span class='line'><span class="k">    </span><span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/accept_redirects
+</span><span class='line'>    <span class="nb">echo </span>0 &gt; <span class="nv">$each</span>/send_redirects
+</span><span class='line'><span class="k">done</span>
+</span><span class='line'>/etc/init.d/ipsec restart
+</span><span class='line'>/etc/init.d/xl2tpd restart
+</span><span class='line'>
+</span><span class='line'>;;
+</span><span class='line'>  *<span class="o">)</span>
+</span><span class='line'> <span class="nb">echo</span> <span class="s2">&quot;Usage: /etc/init.d/ipsec.vpn  {start|stop|restart}&quot;</span>
+</span><span class='line'> <span class="nb">exit </span>1
+</span><span class='line'>  ;;
+</span><span class='line'><span class="k">esac</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>开启执行权限</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo chmod +x /etc/init.d/ipsec.vpn
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>关闭默认的ipsec服务</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo update-rc.d -f ipsec remove
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>添加刚刚创建的服务</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo update-rc.d ipsec.vpn defaults
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>L2TP</h3>
+
+<ul>
+<li>拷贝下面内容到<code>/etc/xl2tpd/xl2tpd.conf</code></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="o">[</span>global<span class="o">]</span>
+</span><span class='line'>ipsec <span class="nv">saref</span> <span class="o">=</span> no
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span>lns default<span class="o">]</span>
+</span><span class='line'>ip <span class="nv">range</span> <span class="o">=</span> 10.152.2.2-10.152.2.254
+</span><span class='line'><span class="nb">local </span><span class="nv">ip</span> <span class="o">=</span> 10.152.2.1
+</span><span class='line'>require <span class="nv">chap</span> <span class="o">=</span> yes
+</span><span class='line'>refuse <span class="nv">pap</span> <span class="o">=</span> yes
+</span><span class='line'>require <span class="nv">authentication</span> <span class="o">=</span> yes
+</span><span class='line'>ppp <span class="nv">debug</span> <span class="o">=</span> yes
+</span><span class='line'><span class="nv">pppoptfile</span> <span class="o">=</span> /etc/ppp/options.xl2tpd
+</span><span class='line'>length <span class="nv">bit</span> <span class="o">=</span> yes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>在<code>/etc/xl2tpd/l2tp-secrets</code>中创建验证字符串</li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>* * exampleforchallengestring
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>拷贝下面内容到<code>/etc/ppp/options.xl2tpd</code></li>
+</ul>
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>refuse-mschap-v2
+</span><span class='line'>refuse-mschap
+</span><span class='line'>ms-dns 8.8.8.8
+</span><span class='line'>ms-dns 8.8.4.4
+</span><span class='line'>asyncmap 0
+</span><span class='line'>auth
+</span><span class='line'>crtscts
+</span><span class='line'>idle 1800
+</span><span class='line'>mtu 1200
+</span><span class='line'>mru 1200
+</span><span class='line'>lock
+</span><span class='line'>hide-password
+</span><span class='line'><span class="nb">local</span>
+</span><span class='line'><span class="c">#debug</span>
+</span><span class='line'>name l2tpd
+</span><span class='line'>proxyarp
+</span><span class='line'>lcp-echo-interval 30
+</span><span class='line'>lcp-echo-failure 4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>添加用户</h3>
+
+<p>－ 编辑文件<code>/etc/ppp/chap-secrets</code>这里和pptp是同一个文件</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>user1 l2tpd chooseagoodpassword *
+</span><span class='line'>user2 * chooseagoodpassword *
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>开启转发，配置过pptp则可跳过</h3>
+
+<p>－ 编辑文件<code>/etc/sysctl.conf</code></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>net.ipv4.ip_forward<span class="o">=</span>1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>执行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sysctl -p
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>开启服务</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo /etc/init.d/ipsec.vpn restart
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>开启防火墙端口，如果使用防火墙</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>L2TP
+</span><span class='line'>———————————
+</span><span class='line'>UDP:500    <span class="o">(</span>isakmp<span class="o">)</span>
+</span><span class='line'>UDP:4500   <span class="o">(</span>nat-t<span class="o">)</span>
+</span><span class='line'>UDP:1701   <span class="o">(</span>l2tp<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Mac连接</h3>
+
+<ul>
+<li>打开network preferences创建l2tp类型的vpn，填入服务器ip，用户名</li>
+<li>验证里面password填上面设置的somegoodpassword</li>
+<li>shared secret 填 exampleforchallengestring</li>
+<li>iOS设备同理
+
+<h1>Winter is coming</h1>
+
+<p>来源:
+<a href="https://help.ubuntu.com/community/L2TPServer">L2TPServer</a>,
+<a href="http://www.xshell.net/networks/339.html">VPN端口号：PPTP、L2TP</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Swift学习笔记-2-函数和闭包]]></title>
@@ -1576,22 +2007,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
 
 <p>至此 Rmagic 就安装完毕了 <br/>
 另附 Rmagick 的<a href="http://studio.imagemagick.org/RMagick/doc/">文档</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Hello world]]></title>
-    <link href="http://blog.xd547.com/blog/2013/04/10/hello-world/"/>
-    <updated>2013-04-10T11:55:00+08:00</updated>
-    <id>http://blog.xd547.com/blog/2013/04/10/hello-world</id>
-    <content type="html"><![CDATA[<p>用 Octopress 的 Hello World</p>
-
-<figure class='code'><figcaption><span>Hello World</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">puts</span> <span class="s2">&quot;Hello World&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-
 ]]></content>
   </entry>
   
