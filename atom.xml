@@ -4,7 +4,7 @@
   <title><![CDATA[RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-10-18T20:59:33+08:00</updated>
+  <updated>2014-10-18T21:25:31+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress中一个神奇的bug－无法选中代码]]></title>
+    <link href="http://blog.xd547.com/blog/2014/10/18/a-mystical-bug-octopress/"/>
+    <updated>2014-10-18T21:05:00+08:00</updated>
+    <id>http://blog.xd547.com/blog/2014/10/18/a-mystical-bug-octopress</id>
+    <content type="html"><![CDATA[<p>使用 OctoPress 作为 blog 的程序主要就是看中它的代码高亮的功能，但是它出现了一个神奇的bug。
+无法选中代码（其实不是真的无法选中，后面说）。
+描述：将代码高亮的主题从dark切换到light后，所有的代码高亮中的代码无法被选中。
+发现：将代码高亮的代码切换回dark，bug消失。于是搜索代码中的 <code>@if $solarized == light</code> 。
+反复确认后发现将 ｀_solarized.scss｀ 中的第31行注释后bug消失（当然样式不正确）。</p>
+
+<figure class='code'><figcaption><span>_solarized.scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nv">$base03</span><span class="o">:</span>          <span class="mh">#002b36</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//darkest blue</span>
+</span><span class='line'><span class="nv">$base02</span><span class="o">:</span>          <span class="mh">#073642</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//dark blue</span>
+</span><span class='line'><span class="nv">$base01</span><span class="o">:</span>          <span class="mh">#586e75</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//darkest gray</span>
+</span><span class='line'><span class="nv">$base00</span><span class="o">:</span>          <span class="mh">#657b83</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//dark gray</span>
+</span><span class='line'><span class="nv">$base0</span><span class="o">:</span>           <span class="mh">#839496</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//medium gray</span>
+</span><span class='line'><span class="nv">$base1</span><span class="o">:</span>           <span class="mh">#93a1a1</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//medium light gray</span>
+</span><span class='line'><span class="nv">$base2</span><span class="o">:</span>           <span class="mh">#eee8d5</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//cream</span>
+</span><span class='line'><span class="nv">$base3</span><span class="o">:</span>           <span class="mh">#fdf6e3</span> <span class="nv">!default</span><span class="p">;</span> <span class="c1">//white</span>
+</span><span class='line'><span class="na">$solar-yellow</span><span class="o">:</span>    <span class="mh">#b58900</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-orange</span><span class="o">:</span>    <span class="mh">#cb4b16</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-red</span><span class="o">:</span>       <span class="mh">#dc322f</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-magenta</span><span class="o">:</span>   <span class="mh">#d33682</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-violet</span><span class="o">:</span>    <span class="mh">#6c71c4</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-blue</span><span class="o">:</span>      <span class="mh">#268bd2</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-cyan</span><span class="o">:</span>      <span class="mh">#2aa198</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$solar-green</span><span class="o">:</span>     <span class="mh">#859900</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$solarized</span><span class="o">:</span> <span class="n">dark</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">@if</span> <span class="nv">$solarized</span> <span class="o">==</span> <span class="n">light</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$_base03</span><span class="o">:</span> <span class="nv">$base03</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base02</span><span class="o">:</span> <span class="nv">$base02</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base01</span><span class="o">:</span> <span class="nv">$base01</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base00</span><span class="o">:</span> <span class="nv">$base00</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base0</span><span class="o">:</span>  <span class="nv">$base0</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base1</span><span class="o">:</span>  <span class="nv">$base1</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base2</span><span class="o">:</span>  <span class="nv">$base2</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$_base3</span><span class="o">:</span>  <span class="nv">$base3</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="nv">$base03</span><span class="o">:</span>  <span class="nv">$_base3</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base02</span><span class="o">:</span>  <span class="nv">$_base2</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base01</span><span class="o">:</span>  <span class="nv">$_base1</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base00</span><span class="o">:</span>  <span class="nv">$_base0</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base0</span><span class="o">:</span>   <span class="nv">$_base00</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base1</span><span class="o">:</span>   <span class="nv">$_base01</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base2</span><span class="o">:</span>   <span class="nv">$_base02</span><span class="p">;</span>
+</span><span class='line'>  <span class="nv">$base3</span><span class="o">:</span>   <span class="nv">$_base03</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/* non highlighted code colors */</span>
+</span><span class='line'><span class="na">$pre-bg</span><span class="o">:</span> <span class="nv">$base03</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$pre-border</span><span class="o">:</span> <span class="nf">darken</span><span class="p">(</span><span class="nv">$base02</span><span class="o">,</span> <span class="mi">5</span><span class="p">)</span> <span class="nv">!default</span><span class="p">;</span>
+</span><span class='line'><span class="na">$pre-color</span><span class="o">:</span> <span class="nv">$base1</span> <span class="nv">!default</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>查看代码发现 <code>$base03</code> 被设置为白色（#fdf6e3），于是搜索 <code>$base03</code>，发现 <code>_syntax.scss</code> 的第31行（又是31）
+下面单独列出相关的行</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='scss'><span class='line'><span class="nc">.gist</span> <span class="nc">.highlight</span><span class="o">,</span> <span class="nt">figure</span><span class="nc">.code</span> <span class="nc">.highlight</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">@include</span><span class="nd"> selection</span><span class="p">(</span><span class="nf">adjust-color</span><span class="p">(</span><span class="nv">$base03</span><span class="o">,</span> <span class="nv">$lightness</span><span class="o">:</span> <span class="mi">23</span><span class="kt">%</span><span class="o">,</span> <span class="nv">$saturation</span><span class="o">:</span> <span class="mi">-65</span><span class="kt">%</span><span class="p">)</span><span class="o">,</span> <span class="nv">$text-shadow</span><span class="o">:</span> <span class="nv">$base03</span> <span class="mi">0</span> <span class="mi">1</span><span class="kt">px</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>看到这里就真相大白了，不是无法选中。而是选中颜色是 <strong>白色</strong> 而背景也是白色，于是 bug 就出现了，选中颜色和背景一样，
+看起来就像没有选中。
+暴力的将其注释掉。bug 解决。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[如何在Ubuntu 12.04 LTS 上安装L2TP Server]]></title>
@@ -1959,56 +2079,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
 
 
 
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[在 Ubuntu 上安装 Rmagick]]></title>
-    <link href="http://blog.xd547.com/blog/2013/04/10/install-rmagick-on-ubuntu/"/>
-    <updated>2013-04-10T22:47:00+08:00</updated>
-    <id>http://blog.xd547.com/blog/2013/04/10/install-rmagick-on-ubuntu</id>
-    <content type="html"><![CDATA[<p>Rmagick 是 ruby 中处理图片的开发库，在 Ruby on Rails 中经常用来处理图片的输出和验证码。 <br/>
-下面就是如何在 Ubuntu 上 安装 Rmagick。<br/>
-0.安装 ruby 的运行环境，推荐使用 rvm 来管理和使用 ruby。<br/>
-1.打开 shell 输入如下命令</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install imagemagick libmagickwand-dev
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2.继续输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rmagick
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3.验证安装，打开 irb 输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;RMagick&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>返回 true 就说安装成功</p>
-
-<p>如果在 Ruby on Rails 中使用需要在项目的 Gemfile 中加入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem <span class="s2">&quot;rmagick&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>至此 Rmagic 就安装完毕了 <br/>
-另附 Rmagick 的<a href="http://studio.imagemagick.org/RMagick/doc/">文档</a></p>
 ]]></content>
   </entry>
   

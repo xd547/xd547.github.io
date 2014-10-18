@@ -9,8 +9,23 @@
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="
-重写activerecord 的 method_missing 不是一个好的主意 #rails ">
+  <meta name="description" content="0.有下面三个 model 关联，使用 through 来简化对 Ownership 的访问 1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+class User &lt; ActiveRecord::Base # association has_many : &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -75,6 +90,134 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2013/12/26/get-association-attributes-using-through/">使用through关联时访问关系的属性</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-26T21:49:00+08:00" pubdate data-updated="true">2013-12-26 21:49:00</time>
+        
+         | <a href="/blog/2013/12/26/get-association-attributes-using-through/#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>0.有下面三个 model 关联，使用 through 来简化对 Ownership 的访问</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># association</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:ownerships</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:destroy</span>
+</span><span class='line'>  <span class="n">has_many</span> <span class="ss">:shops</span><span class="p">,</span> <span class="ss">through</span><span class="p">:</span> <span class="ss">:ownerships</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Ownership</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:user</span>
+</span><span class='line'>  <span class="n">belongs_to</span> <span class="ss">:shop</span>
+</span><span class='line'><span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">Shop</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="c1"># association</span>
+</span><span class='line'>  <span class="n">has_one</span>  <span class="ss">:ownership</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:destroy</span>
+</span><span class='line'>  <span class="n">has_one</span>  <span class="ss">:user</span><span class="p">,</span> <span class="ss">through</span><span class="p">:</span> <span class="ss">:ownership</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.此时无法在Shop中在 after_create 来访问 ownership 的 user_id 属性，因为这时 owership 还未创建。当事务 commit 以后 owership 被创建，同时拥有 user_id 属性。这时就可以获得 user_id 从而进行相关操作</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Shop</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord</span><span class="p">:</span><span class="ss">:Base</span>
+</span><span class='line'>  <span class="n">after_commit</span> <span class="ss">:get_attr_after_destroy</span><span class="p">,</span> <span class="ss">on</span><span class="p">:</span> <span class="o">[</span><span class="ss">:destroy</span><span class="o">]</span>
+</span><span class='line'>  <span class="n">after_commit</span> <span class="ss">:get_attr_after_create</span><span class="p">,</span>  <span class="ss">on</span><span class="p">:</span> <span class="o">[</span><span class="ss">:create</span><span class="o">]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">after_create</span> <span class="ss">:get_attr_in_after_create</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># association</span>
+</span><span class='line'>  <span class="n">has_one</span>  <span class="ss">:ownership</span><span class="p">,</span> <span class="ss">dependent</span><span class="p">:</span> <span class="ss">:destroy</span>
+</span><span class='line'>  <span class="n">has_one</span>  <span class="ss">:user</span><span class="p">,</span> <span class="ss">through</span><span class="p">:</span> <span class="ss">:ownership</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="kp">private</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get_attr_after_destroy</span>
+</span><span class='line'>      <span class="n">user_id</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">ownership</span><span class="o">.</span><span class="n">user_id</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get_attr_after_create</span>
+</span><span class='line'>      <span class="n">user_id</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">ownership</span><span class="o">.</span><span class="n">user_id</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">get_attr_in_after_create</span>
+</span><span class='line'>      <span class="c1"># self.ownership is nil</span>
+</span><span class='line'>      <span class="c1"># NoMethodError: undefined method `user_id&#39; for nil:NilClass</span>
+</span><span class='line'>      <span class="n">user_id</span> <span class="o">=</span> <span class="nb">self</span><span class="o">.</span><span class="n">ownership</span><span class="o">.</span><span class="n">user_id</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -676,85 +819,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/04/10/install-rmagick-on-ubuntu/">在 Ubuntu 上安装 Rmagick</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-10T22:47:00+08:00" pubdate data-updated="true">2013-04-10 22:47:00</time>
-        
-         | <a href="/blog/2013/04/10/install-rmagick-on-ubuntu/#disqus_thread">评论</a>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Rmagick 是 ruby 中处理图片的开发库，在 Ruby on Rails 中经常用来处理图片的输出和验证码。 <br/>
-下面就是如何在 Ubuntu 上 安装 Rmagick。<br/>
-0.安装 ruby 的运行环境，推荐使用 rvm 来管理和使用 ruby。<br/>
-1.打开 shell 输入如下命令</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install imagemagick libmagickwand-dev
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>2.继续输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rmagick
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>3.验证安装，打开 irb 输入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;RMagick&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>返回 true 就说安装成功</p>
-
-<p>如果在 Ruby on Rails 中使用需要在项目的 Gemfile 中加入</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem <span class="s2">&quot;rmagick&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>然后</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>至此 Rmagic 就安装完毕了 <br/>
-另附 Rmagick 的<a href="http://studio.imagemagick.org/RMagick/doc/">文档</a></p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/3/">&larr; 较旧</a>
@@ -772,6 +836,10 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/18/a-mystical-bug-octopress/">Octopress中一个神奇的bug－无法选中代码</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/19/how-to-install-l2tp-on-ubuntu-12-04/">如何在Ubuntu 12.04 LTS 上安装L2TP Server</a>
       </li>
     
@@ -785,10 +853,6 @@ Firefox下 document.createElement 创建的表单元素无法正确提交(submit
     
       <li class="post">
         <a href="/blog/2014/06/03/swift-learning-notes-0/">Swift学习笔记-0</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/23/design-patterns-reading-notes-0/">设计模式读书笔记－0</a>
       </li>
     
   </ul>

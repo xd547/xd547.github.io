@@ -9,8 +9,9 @@
   <meta name="author" content="RainySummer">
 
   
-  <meta name="description" content="用 Octopress 的 Hello World Hello World1
-puts &quot;Hello World&quot; ">
+  <meta name="description" content="Rmagick 是 ruby 中处理图片的开发库，在 Ruby on Rails 中经常用来处理图片的输出和验证码。 下面就是如何在 Ubuntu 上 安装 Rmagick。
+0.安装 ruby 的运行环境，推荐使用 rvm 来管理和使用 ruby。
+1.打开 shell 输入如下命令 1 &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -81,6 +82,85 @@ puts &quot;Hello World&quot; ">
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2013/04/10/install-rmagick-on-ubuntu/">在 Ubuntu 上安装 Rmagick</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-10T22:47:00+08:00" pubdate data-updated="true">2013-04-10 22:47:00</time>
+        
+         | <a href="/blog/2013/04/10/install-rmagick-on-ubuntu/#disqus_thread">评论</a>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Rmagick 是 ruby 中处理图片的开发库，在 Ruby on Rails 中经常用来处理图片的输出和验证码。 <br/>
+下面就是如何在 Ubuntu 上 安装 Rmagick。<br/>
+0.安装 ruby 的运行环境，推荐使用 rvm 来管理和使用 ruby。<br/>
+1.打开 shell 输入如下命令</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>sudo apt-get install imagemagick libmagickwand-dev
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>2.继续输入</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem install rmagick
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>3.验证安装，打开 irb 输入</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;RMagick&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>返回 true 就说安装成功</p>
+
+<p>如果在 Ruby on Rails 中使用需要在项目的 Gemfile 中加入</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>gem <span class="s2">&quot;rmagick&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>然后</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>bundle install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>至此 Rmagic 就安装完毕了 <br/>
+另附 Rmagick 的<a href="http://studio.imagemagick.org/RMagick/doc/">文档</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2013/04/10/hello-world/">Hello World</a></h1>
     
     
@@ -136,6 +216,10 @@ puts &quot;Hello World&quot; ">
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2014/10/18/a-mystical-bug-octopress/">Octopress中一个神奇的bug－无法选中代码</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/06/19/how-to-install-l2tp-on-ubuntu-12-04/">如何在Ubuntu 12.04 LTS 上安装L2TP Server</a>
       </li>
     
@@ -149,10 +233,6 @@ puts &quot;Hello World&quot; ">
     
       <li class="post">
         <a href="/blog/2014/06/03/swift-learning-notes-0/">Swift学习笔记-0</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/23/design-patterns-reading-notes-0/">设计模式读书笔记－0</a>
       </li>
     
   </ul>
