@@ -181,7 +181,9 @@ println("Hello， &hellip;">
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>let emptyArray = String[]()
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>let emptyArray = String[]() // 新版该句会出错，见下面
+</span><span class='line'>let emptyArray = [String]() // 新语法
 </span><span class='line'>let emptyDictionary = Dictionary&lt;String, Float&gt;()
 </span><span class='line'>// 说明Swift是强类型的，不像脚本语言可以装任意对象在数组和字典里面
 </span><span class='line'>// 字典的key只能使用 String，而不是任何对象</span></code></pre></td></tr></table></div></figure>

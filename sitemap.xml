@@ -2,112 +2,112 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.xd547.com/blog/2013/04/10/hello-world/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/04/10/install-rmagick-on-ubuntu/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/04/12/simulate-upload-in-rspec/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/04/15/flexible-setting-in-rails-app-1/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/04/29/flexible-setting-in-rails-app-2/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/06/22/rails-cross-controller-cache-control-1/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.xd547.com/blog/2013/12/01/fix-javascript-created-form-submit-bug-in-firefox/
         </loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/12/17/modify-git-commit-msg-after-push/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.xd547.com/blog/2013/12/17/use-offical-nginx-repo-install-nginx-on-ubuntu/
         </loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/12/18/install-recent-version-nodejs-on-ubuntu/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/12/26/rails-tips/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2013/12/26/get-association-attributes-using-through/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/02/25/why-i-love-mac/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/02/25/why-i-hate-mac/</loc>
-        <lastmod>2014-03-21T11:09:36+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/02/27/ruby-tricks/</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/03/28/setup-a-shadowsocks-sock5-proxy/</loc>
-        <lastmod>2014-03-28T21:53:26+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/05/23/design-patterns-reading-notes-0/</loc>
-        <lastmod>2014-06-01T19:22:36+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/06/03/swift-learning-notes-0/</loc>
-        <lastmod>2014-06-04T12:16:27+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/06/05/swift-learning-notes-1-control-flow/</loc>
-        <lastmod>2014-06-05T14:29:25+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.xd547.com/blog/2014/06/10/swift-learning-notes-2-functions-closures/
         </loc>
-        <lastmod>2014-06-10T22:24:08+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/2014/06/19/how-to-install-l2tp-on-ubuntu-12-04/</loc>
-        <lastmod>2014-06-19T16:14:42+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/404.html</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/about/</loc>
-        <lastmod>2014-03-26T09:58:38+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/blog/archives/</loc>
-        <lastmod>2014-06-19T16:14:42+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/</loc>
-        <lastmod>2014-06-19T16:14:42+08:00</lastmod>
+        <lastmod>2014-10-18T20:00:32+08:00</lastmod>
     </url>
     <url>
         <loc>http://blog.xd547.com/robots.txt</loc>
-        <lastmod>2014-03-14T18:10:52+08:00</lastmod>
+        <lastmod>2014-10-18T19:59:18+08:00</lastmod>
     </url>
 </urlset>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: swift | RainySummer's New Blog]]></title>
   <link href="http://blog.xd547.com/blog/categories/swift/atom.xml" rel="self"/>
   <link href="http://blog.xd547.com/"/>
-  <updated>2014-06-19T16:15:12+08:00</updated>
+  <updated>2014-10-18T20:59:33+08:00</updated>
   <id>http://blog.xd547.com/</id>
   <author>
     <name><![CDATA[RainySummer]]></name>
@@ -357,7 +357,8 @@ occupations["Jayne"] = "Public Relations"
 <code>
 使用initializer syntax创建空数组和字典
 </code>
-let emptyArray = String<a href=""></a>
+let emptyArray = String<a href=""></a> // 新版该句会出错，见下面
+let emptyArray = <a href="">String</a> // 新语法
 let emptyDictionary = Dictionary&lt;String, Float>()
 // 说明Swift是强类型的，不像脚本语言可以装任意对象在数组和字典里面
 // 字典的key只能使用 String，而不是任何对象
