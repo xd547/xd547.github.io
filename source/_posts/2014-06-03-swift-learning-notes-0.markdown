@@ -51,7 +51,8 @@ occupations["Jayne"] = "Public Relations"
 ```
 使用initializer syntax创建空数组和字典
 ```
-let emptyArray = String[]()
+let emptyArray = String[]() // 新版该句会出错，见下面
+let emptyArray = [String]() // 新语法
 let emptyDictionary = Dictionary<String, Float>()
 // 说明Swift是强类型的，不像脚本语言可以装任意对象在数组和字典里面
 // 字典的key只能使用 String，而不是任何对象
